@@ -14,7 +14,7 @@ app.use(express.json());
 
 // dc connection
 mongoose
-    .connect("mongodb://127.0.0.1:27017/Kitsune-db")
+    .connect("mongodb://127.0.0.1:27017/KistuneDB")
     .then(() => console.log("Connected to MongoDB"))
     .catch((err) => console.error("Connection error:", err));
 

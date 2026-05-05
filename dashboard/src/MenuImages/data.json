@@ -4,146 +4,146 @@
     "name": "Gyoza",
     "description": "Pan-fried pork or chicken dumplings, perfectly crisp on the outside and juicy inside.",
     "price": 180,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "app-2",
     "name": "Takoyaki",
     "description": "Savory octopus balls drizzled with takoyaki sauce, mayo, and topped with bonito flakes.",
     "price": 150,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "app-3",
     "name": "Tempura",
     "description": "Lightly battered and deep-fried shrimp and mixed vegetables.",
     "price": 220,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "app-4",
     "name": "Edamame",
     "description": "Steamed young soybeans lightly salted. A perfect healthy starter.",
     "price": 120,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "app-5",
     "name": "Karaage",
     "description": "Japanese style bite-sized fried chicken, marinated in soy sauce and ginger.",
     "price": 190,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "ramen-1",
     "name": "Tonkotsu Ramen",
     "description": "Rich pork bone broth ramen with chashu, soft-boiled egg, and wood ear mushrooms.",
     "price": 350,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "ramen-2",
     "name": "Shoyu / Shio Ramen",
     "description": "Clear soy-sauce or salt-based broth ramen, light and flavorful.",
     "price": 320,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "ramen-3",
     "name": "Miso Ramen",
     "description": "Rich miso-flavored broth ramen with sweet corn, butter, and chashu.",
     "price": 340,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "ramen-4",
     "name": "Tempura Ramen",
     "description": "Hearty ramen served with crispy shrimp tempura on the side.",
     "price": 380,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "ramen-5",
     "name": "Yakisoba",
     "description": "Japanese stir-fried noodles with pork and vegetables in a savory sauce.",
     "price": 280,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "rice-1",
     "name": "Japanese Chicken Curry",
     "description": "Crispy chicken katsu served with rich, mildly sweet Japanese curry over rice.",
     "price": 310,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "rice-2",
     "name": "Salmon Steak Set",
     "description": "Grilled salmon steak glazed with teriyaki sauce, served with rice and miso soup.",
     "price": 450,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "rice-3",
     "name": "Orange Chicken",
     "description": "Crispy chicken pieces tossed in a sweet and tangy orange sauce.",
     "price": 290,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "rice-4",
     "name": "Katsudon",
     "description": "Pork cutlet simmered in a sweet soy dashi broth with egg, served over a bowl of rice.",
     "price": 320,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "light-1",
     "name": "Katsu Sandwich",
     "description": "Thick pork cutlet sandwich with shredded cabbage and tonkatsu sauce.",
     "price": 250,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "light-2",
     "name": "Creamy Mushroom Pasta",
     "description": "Japanese-style wafu pasta with an umami-rich creamy mushroom sauce.",
     "price": 280,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "light-3",
     "name": "Gyudon",
     "description": "Thinly sliced beef and sweet onions simmered in dashi and soy sauce over rice.",
     "price": 300,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "drink-1",
     "name": "Kitsune Coffee",
     "description": "Signature house blend coffee. Available hot or iced.",
     "price": 150,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "drink-2",
     "name": "Matcha Latte",
     "description": "Premium Uji matcha blended with creamy milk. A cafe favorite.",
     "price": 180,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "drink-3",
     "name": "Hokkaido Milk Tea",
     "description": "Rich and creamy roasted milk tea.",
     "price": 160,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   },
   {
     "id": "drink-4",
     "name": "Soft Drinks",
     "description": "Selection of refreshing sodas.",
     "price": 80,
-    "photo": ""
+    "photo": "http://localhost:1337/uploads/gyoza.png"
   }
 ]
