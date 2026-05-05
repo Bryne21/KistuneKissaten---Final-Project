@@ -1,0 +1,56 @@
+.admin-theme {
+  background-color: var(--cream);
+  min-height: 100vh;
+}
+
+.admin-header {
+  background-color: var(--dark-wood);
+  color: var(--cream);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-header h2 {
+  margin: 0;
+  color: var(--burnt-orange);
+}
+
+.home-link {
+  color: var(--cream);
+  text-decoration: underline;
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2rem;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.AddMenuForm {
+  flex: 1;
+  min-width: 300px;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-top: 5px solid var(--burnt-orange);
+}
+
+.Preview {
+  flex: 2;
+  min-width: 500px;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+  }
+}

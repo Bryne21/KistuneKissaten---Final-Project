@@ -1,0 +1,18 @@
+:root {
+  --cream: #FAF3E0;
+  --burnt-orange: #CC5500;
+  --dark-wood: #2C1E16;
+  --text-main: #333333;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Roboto', sans-serif;
+  background-color: var(--cream);
+  color: var(--text-main);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
