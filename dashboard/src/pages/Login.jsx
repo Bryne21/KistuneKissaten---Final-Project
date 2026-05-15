@@ -128,18 +128,6 @@ function Login() {
               {loading ? "Signing In..." : "Sign In"}
             </Button>
 
-            <Grid container justifyContent="space-between">
-              <Grid item>
-                <Link href="#" variant="body2" className="login-link">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2" className="login-link">
-                  Sign Up
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </div>
         <Link href="/" className="back-link">
