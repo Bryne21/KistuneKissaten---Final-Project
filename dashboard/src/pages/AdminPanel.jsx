@@ -27,6 +27,7 @@ function AdminPanel() {
     const [userName, setUserName] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const [userPassword, setUserPassword] = useState('');
+    const [userEditId, setUserEditId] = useState(null);
 
     const isAuthenticated = !!localStorage.getItem("token");
 
@@ -125,7 +126,6 @@ function AdminPanel() {
         }
 
         const formData = new FormData();
-        // Ensure price is a number
         const menuData = { 
             id: menuId, 
             name, 
@@ -141,15 +141,15 @@ function AdminPanel() {
         }
 
         try {
-            const response = await axios.post("http://localhost:1337/add-menu", formData, {
+            await axios.post("http://localhost:1337/add-menu", formData, {
                 headers: { "Content-Type": "multipart/form-data" }
             });
-            alert("Menu Added Successfully to MongoDB!");
+            alert("Menu Added Successfully!");
             clearForm();
             fetchMenu();
         } catch (error) {
             console.error("Add Error:", error);
-            alert("Failed to add menu. " + (error.response?.data || "Check server connection."));
+            alert("Failed to add menu.");
         }
     }
 
@@ -175,12 +175,12 @@ function AdminPanel() {
             await axios.put(`http://localhost:1337/edit-menu/${editIndex}`, formData, {
                 headers: { "Content-Type": "multipart/form-data" }
             });
-            alert("Menu Updated Successfully in MongoDB!");
+            alert("Menu Updated Successfully!");
             clearForm();
             fetchMenu();
         } catch (error) {
             console.error("Update Error:", error);
-            alert("Failed to update menu. " + (error.response?.data || "Check server connection."));
+            alert("Failed to update menu.");
         }
     }
 
@@ -212,13 +212,48 @@ function AdminPanel() {
         }
     }
 
+    const handleUserEdit = (user) => {
+        setUserName(user.name);
+        setUserEmail(user.email);
+        setUserPassword(user.password);
+        setUserEditId(user._id);
+    };
+
+    async function handleUpdateUser() {
+        if (!userName || !userEmail || !userPassword) {
+            alert("Please fill all user fields.");
+            return;
+        }
+        try {
+            await axios.put(`http://localhost:1337/edit-user-db/${userEditId}`, {
+                name: userName, email: userEmail, password: userPassword
+            });
+            alert("User updated successfully!");
+            setUserName(''); setUserEmail(''); setUserPassword(''); setUserEditId(null);
+            fetchUsers();
+        } catch (err) {
+            console.error(err);
+            alert("Failed to update user.");
+        }
+    }
+
+    async function handleDeleteUser(id) {
+        if (!window.confirm("Delete this user?")) return;
+        try {
+            await axios.delete(`http://localhost:1337/delete-user-db/${id}`);
+            alert("User deleted successfully!");
+            fetchUsers();
+        } catch (err) {
+            console.error(err);
+            alert("Failed to delete user.");
+        }
+    }
+
     return (
         <div className="admin-theme">
             <header className="navbar">
                 <div className="logo-container">
-                    <div className="logo-circle">
-                        <img src={logoImg} alt="Fox Logo" className="nav-logo" />
-                    </div>
+                    <img src={logoImg} alt="Fox Logo" className="nav-logo" />
                     <div className="logo-text">
                         <span className="logo-jp">キツネ喫茶店</span>
                         <span className="logo-en">KITSUNE KISSATEN</span>
@@ -230,7 +265,6 @@ function AdminPanel() {
                     <Link to="/#menu">MENU</Link>
                     <Link to="/#about">ABOUT US</Link>
                     <Link to="/#contact">CONTACT</Link>
-                    
                     {isAuthenticated ? (
                         <>
                             <Link to="/students" className="active">ADMIN</Link>
@@ -243,105 +277,135 @@ function AdminPanel() {
             </header>
 
             <div className="main">
-                <div className="AddMenuForm">
-                    <h1>{editIndex !== null ? "Edit Menu Item" : "Add Menu Item"}</h1>
-                    
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '2rem' }}>
-                        <Avatar src={imagePreview} sx={{ width: 100, height: 100, mb: 2, border: '2px solid #EADAC2' }} variant="rounded" />
-                        <Button variant="outlined" component="label" size="small" className="btn-edit">
-                            Upload Photo
-                            <input type="file" hidden accept="image/*" onChange={handleFileChange} />
-                        </Button>
-                    </Box>
-
-                    <TextField 
-                        select 
-                        label="Menu Location" 
-                        fullWidth 
-                        margin="normal" 
-                        value={locationLabel} 
-                        onChange={(e) => handleLocationChange(e.target.value)}
-                    >
-                        {locations.map((loc) => (
-                            <MenuItem key={loc.label} value={loc.label}>{loc.label}</MenuItem>
-                        ))}
-                    </TextField>
-
-                    <TextField label="Item ID" fullWidth margin="normal" value={menuId} disabled={editIndex !== null} onChange={(e) => setMenuId(e.target.value)} />
-                    <TextField label="Name" fullWidth margin="normal" value={name} onChange={(e) => setName(e.target.value)} />
-                    <TextField label="Description" fullWidth margin="normal" multiline rows={3} value={description} onChange={(e) => setDescription(e.target.value)} />
-                    <TextField label="Price" fullWidth margin="normal" value={price} type="number" onChange={(e) => setPrice(e.target.value)} />
-                    
-                    <Box sx={{ mt: 3, display: 'flex', gap: 2 }}>
-                        {editIndex === null ? (
-                            <Button variant="contained" className="btn-admin" onClick={handleAddMenu}>Add Menu</Button>
-                        ) : (
-                            <Button variant="contained" className="btn-admin-secondary" onClick={handleUpdateMenu}>Update Menu</Button>
-                        )}
-                        {editIndex !== null && <Button variant="text" onClick={clearForm} sx={{ color: '#888' }}>Cancel</Button>}
-                    </Box>
-                </div>
-
-                <div className="Preview">
-                    <h1>Menu List</h1>
-                    <TableContainer sx={{ maxHeight: 600 }}>
-                        <Table stickyHeader>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Photo</TableCell>
-                                    <TableCell>ID</TableCell>
-                                    <TableCell>Location</TableCell>
-                                    <TableCell>Name</TableCell>
-                                    <TableCell>Price</TableCell>
-                                    <TableCell>Edit</TableCell>
-                                    <TableCell>Delete</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {menuList.map((m) => (
-                                    <TableRow key={m.id}>
-                                        <TableCell><Avatar src={m.photo} variant="rounded" sx={{ width: 50, height: 50 }} /></TableCell>
-                                        <TableCell><Typography variant="body2" sx={{ fontWeight: 600 }}>{m.id}</Typography></TableCell>
-                                        <TableCell>{m.subcategory || m.category}</TableCell>
-                                        <TableCell>{m.name}</TableCell>
-                                        <TableCell sx={{ fontWeight: 700, color: '#D35400' }}>₱{m.price}</TableCell>
-                                        <TableCell><Button variant="outlined" size="small" className="btn-edit" onClick={() => handleEdit(m)}>Edit</Button></TableCell>
-                                        <TableCell><Button variant="outlined" size="small" className="btn-delete" onClick={() => handleDelete(m.id)}>Delete</Button></TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </div>
-
-                <div className="AddMenuForm">
-                    <h1>Add User</h1>
-                    <TextField label="Name" fullWidth margin="normal" value={userName} onChange={(e) => setUserName(e.target.value)} />
-                    <TextField label="Email" fullWidth margin="normal" value={userEmail} onChange={(e) => setUserEmail(e.target.value)} />
-                    <TextField label="Password" type="password" fullWidth margin="normal" value={userPassword} onChange={(e) => setUserPassword(e.target.value)} />
-                    <Button variant="contained" className="btn-admin" sx={{ mt: 2 }} onClick={handleAddUser}>Add User</Button>
+                {/* MENU SECTION */}
+                <div className="section-title">
+                    <Typography variant="h4" sx={{ fontFamily: 'Playfair Display', color: '#1A100C', fontWeight: 700 }}>
+                        Menu Management
+                    </Typography>
                 </div>
                 
-                <div className="Preview">
-                    <h1>User List</h1>
-                    <TableContainer>
-                        <Table>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Name</TableCell>
-                                    <TableCell>Email</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {users.map((u, i) => (
-                                    <TableRow key={i}>
-                                        <TableCell sx={{ fontWeight: 600 }}>{u.name}</TableCell>
-                                        <TableCell>{u.email}</TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                <div className="management-row">
+                    <div className="form-container">
+                        <div className="AddMenuForm">
+                            <h1>{editIndex !== null ? "Edit Menu Item" : "Add Menu Item"}</h1>
+                            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 2 }}>
+                                <Avatar src={imagePreview} sx={{ width: 80, height: 80, mb: 1, border: '2px solid #EADAC2' }} variant="rounded" />
+                                <Button variant="outlined" component="label" size="small" className="btn-edit" sx={{ fontSize: '0.7rem' }}>
+                                    Upload Photo
+                                    <input type="file" hidden accept="image/*" onChange={handleFileChange} />
+                                </Button>
+                            </Box>
+                            <TextField select label="Location" fullWidth size="small" margin="dense" value={locationLabel} onChange={(e) => handleLocationChange(e.target.value)}>
+                                {locations.map((loc) => (<MenuItem key={loc.label} value={loc.label}>{loc.label}</MenuItem>))}
+                            </TextField>
+                            <TextField label="Item ID" fullWidth size="small" margin="dense" value={menuId} disabled={editIndex !== null} onChange={(e) => setMenuId(e.target.value)} />
+                            <TextField label="Name" fullWidth size="small" margin="dense" value={name} onChange={(e) => setName(e.target.value)} />
+                            <TextField label="Description" fullWidth size="small" margin="dense" multiline rows={2} value={description} onChange={(e) => setDescription(e.target.value)} />
+                            <TextField label="Price" fullWidth size="small" margin="dense" value={price} type="number" onChange={(e) => setPrice(e.target.value)} />
+                            <Box sx={{ mt: 2, display: 'flex', gap: 2 }}>
+                                {editIndex === null ? (
+                                    <Button variant="contained" className="btn-admin" onClick={handleAddMenu}>Add Menu</Button>
+                                ) : (
+                                    <Button variant="contained" className="btn-admin-secondary" onClick={handleUpdateMenu}>Update Menu</Button>
+                                )}
+                                {editIndex !== null && <Button variant="text" onClick={clearForm}>Cancel</Button>}
+                            </Box>
+                        </div>
+                    </div>
+                    
+                    <div className="list-container">
+                        <div className="Preview">
+                            <h1>Menu List</h1>
+                            <TableContainer sx={{ maxWidth: '100%', overflowX: 'auto' }}>
+                                <Table stickyHeader size="small">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Photo</TableCell>
+                                            <TableCell>ID</TableCell>
+                                            <TableCell>Name</TableCell>
+                                            <TableCell>Price</TableCell>
+                                            <TableCell>Actions</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {menuList.map((m) => (
+                                            <TableRow key={m.id}>
+                                                <TableCell><Avatar src={m.photo} variant="rounded" sx={{ width: 40, height: 40 }} /></TableCell>
+                                                <TableCell>{m.id}</TableCell>
+                                                <TableCell>{m.name}</TableCell>
+                                                <TableCell>₱{m.price}</TableCell>
+                                                <TableCell>
+                                                    <Box sx={{ display: 'flex', gap: 1 }}>
+                                                        <Button size="small" variant="outlined" className="btn-edit" onClick={() => handleEdit(m)}>Edit</Button>
+                                                        <Button size="small" variant="outlined" className="btn-delete" onClick={() => handleDelete(m.id)}>Del</Button>
+                                                    </Box>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </div>
+                    </div>
+                </div>
+
+                <hr className="section-divider" />
+
+                {/* USER SECTION */}
+                <div className="section-title">
+                    <Typography variant="h4" sx={{ fontFamily: 'Playfair Display', color: '#1A100C', fontWeight: 700 }}>
+                        Staff Management
+                    </Typography>
+                </div>
+
+                <div className="management-row staff-row">
+                    <div className="form-container">
+                        <div className="AddMenuForm">
+                            <h1>{userEditId ? "Edit User" : "Add User"}</h1>
+                            <TextField label="Name" fullWidth size="small" margin="dense" value={userName} onChange={(e) => setUserName(e.target.value)} />
+                            <TextField label="Email" fullWidth size="small" margin="dense" value={userEmail} onChange={(e) => setUserEmail(e.target.value)} />
+                            <TextField label="Password" type="password" fullWidth size="small" margin="dense" value={userPassword} onChange={(e) => setUserPassword(e.target.value)} />
+                            <Box sx={{ mt: 2, display: 'flex', gap: 2 }}>
+                                {userEditId ? (
+                                    <Button variant="contained" className="btn-admin-secondary" onClick={handleUpdateUser}>Update User</Button>
+                                ) : (
+                                    <Button variant="contained" className="btn-admin" onClick={handleAddUser}>Add User</Button>
+                                )}
+                                {userEditId && <Button variant="text" onClick={() => { setUserName(''); setUserEmail(''); setUserPassword(''); setUserEditId(null); }}>Cancel</Button>}
+                            </Box>
+                        </div>
+                    </div>
+
+                    <div className="list-container">
+                        <div className="Preview">
+                            <h1>User List</h1>
+                            <TableContainer sx={{ overflowX: 'auto' }}>
+                                <Table size="small">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>Name</TableCell>
+                                            <TableCell>Email</TableCell>
+                                            <TableCell>Actions</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {users.map((u, i) => (
+                                            <TableRow key={u._id || i}>
+                                                <TableCell>{u.name}</TableCell>
+                                                <TableCell>{u.email}</TableCell>
+                                                <TableCell>
+                                                    <Box sx={{ display: 'flex', gap: 1 }}>
+                                                        <Button size="small" variant="outlined" className="btn-edit" onClick={() => handleUserEdit(u)}>Edit</Button>
+                                                        <Button size="small" variant="outlined" className="btn-delete" onClick={() => handleDeleteUser(u._id)}>Del</Button>
+                                                    </Box>
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

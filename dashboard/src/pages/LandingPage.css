@@ -604,10 +604,12 @@
 
 .scrollable-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
-  padding: 1rem 0;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid instead of fixed columns */
+  gap: 30px;
+  padding: 1.5rem 0;
   justify-items: center;
+  width: 100%;
+  overflow: visible; /* Ensure no scrollbars */
 }
 
 .menu-item-card {

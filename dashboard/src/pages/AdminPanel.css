@@ -52,37 +52,85 @@
 }
 
 .main {
+  padding: 2rem 4rem 2rem 4rem;
   display: flex;
-  flex-wrap: wrap;
-  padding: 0 4rem 4rem 4rem;
+  flex-direction: column;
+  gap: 1.5rem; /* Reduced from 2rem */
+}
+
+.section-title {
+  border-bottom: 2px solid var(--burnt-orange);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem; /* Fixed from negative margin */
+}
+
+.management-row {
+  display: flex;
   gap: 2rem;
-  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 3rem;
+  align-items: stretch;
+  height: 750px; /* Slightly increased to fit all fields comfortably */
+}
+
+.management-row.staff-row {
+  height: 380px; /* Shorter height for staff section */
+}
+
+.form-container {
+  flex: 0 0 400px;
+  height: 100%;
+}
+
+.list-container {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+}
+
+.section-divider {
+  border: none;
+  border-top: 1px solid rgba(211, 84, 0, 0.1);
+  margin: 1rem 0 3rem 0;
 }
 
 .AddMenuForm {
-  flex: 1;
-  min-width: 320px;
   background: white;
-  padding: 2.5rem;
+  padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  border-top: 5px solid var(--burnt-orange);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  border-top: 4px solid var(--burnt-orange);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  /* Removed fixed height to let content determine size naturally */
 }
 
 .AddMenuForm h1 {
   font-family: 'Playfair Display', serif;
   color: var(--text-dark);
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: 1.6rem; /* Slightly smaller */
+  margin-bottom: 1rem;
+}
+
+.AddMenuForm .MuiTextField-root {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .Preview {
-  flex: 2;
-  min-width: 600px;
   background: white;
-  padding: 2.5rem;
+  padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  height: 100%; /* Take full height of parent row */
+  display: flex;
+  flex-direction: column;
+}
+
+.Preview .MuiTableContainer-root {
+  flex: 1; /* Grow to fill the card height */
+  overflow-y: auto; /* Enable vertical scroll */
 }
 
 .Preview h1 {
@@ -103,8 +151,9 @@
   color: var(--text-dark);
   border-bottom: 2px solid var(--cream);
   text-transform: uppercase;
-  font-size: 0.8rem;
+  font-size: 0.75rem; /* Slightly smaller font */
   letter-spacing: 1px;
+  padding: 1rem 0.5rem; /* Consistent padding */
 }
 
 .MuiTableBody-root .MuiTableRow-root {
@@ -120,7 +169,7 @@
 .MuiTableBody-root .MuiTableCell-root {
   border: none;
   color: #555;
-  padding: 1rem;
+  padding: 0.8rem 0.5rem; /* Reduced padding to fit columns */
 }
 
 .MuiTableBody-root .MuiTableCell-root:first-child {

@@ -59,7 +59,7 @@ function Login() {
         }),
       );
 
-      window.location.href = "/";
+      window.location.href = "/students";
     } catch (err) {
       console.error("Login Error:", err);
       setError(
@@ -117,7 +117,6 @@ function Login() {
                 {error}
               </Typography>
             )}
-
             <Button
               type="submit"
               fullWidth
@@ -127,7 +126,6 @@ function Login() {
             >
               {loading ? "Signing In..." : "Sign In"}
             </Button>
-
           </Box>
         </div>
         <Link href="/" className="back-link">
