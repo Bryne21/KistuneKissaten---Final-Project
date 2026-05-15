@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import heroImg from '../assets/mainImage.png';
+import heroImg from '../assets/enchangeMainImage.png';
+import secondMainImg from '../assets/2ndImageFinal.png';
 import logoImg from '../assets/kistunelogo.png';
+import kitsuneIcon from '../Icons/kitsune.png';
+import toriiIcon from '../Icons/torii-gate.png';
+import menuBg from '../assets/menu_bg.png';
+import storyBg from '../assets/story_bg.png';
 import './LandingPage.css';
 
 function LandingPage() {
   const [menuItems, setMenuItems] = useState([]);
+  const isAuthenticated = !!localStorage.getItem("token");
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "/";
+  };
 
   useEffect(() => {
     axios.get("http://localhost:1337/menu")
@@ -19,57 +31,263 @@ function LandingPage() {
       <header className="navbar">
         <div className="logo-container">
           <img src={logoImg} alt="Fox Logo" className="nav-logo" />
-          <div className="logo">Kitsune Kissaten</div>
+          <div className="logo-text">
+            <span className="logo-jp">キツネ喫茶店</span>
+            <span className="logo-en">KITSUNE KISSATEN</span>
+            <span className="logo-loc">SOLANO, NUEVA VIZCAYA</span>
+          </div>
         </div>
-        <nav>
-          <a href="#about">About</a>
-          <a href="#location">Location</a>
-          <a href="#menu">Menu</a>
-          <Link to="/admin" className="login-btn">Admin Login</Link>
+        <nav className="main-nav">
+          <a href="#home" className="active">HOME</a>
+          <a href="#menu">MENU</a>
+          <a href="#about">ABOUT US</a>
+          <a href="#contact">CONTACT</a>
+
+          {isAuthenticated ? (
+            <>
+              <Link to="/students">ADMIN</Link>
+              <button
+                onClick={handleSignOut}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: 'inherit',
+                  font: 'inherit',
+                  cursor: 'pointer',
+                  padding: 0,
+                  marginLeft: '1rem'
+                }}
+              >
+                SIGN OUT
+              </button>
+            </>
+          ) : (
+            <Link to="/login">LOGIN</Link>
+          )}
         </nav>
       </header>
 
-      <section className="hero">
-        <img src={heroImg} alt="Welcome to Kitsune Kissaten" className="hero-image" />
+      <section id="home" className="hero" style={{ backgroundImage: `url(${secondMainImg})` }}>
+
+
+        <div className="hero-content">
+          <p className="hero-jp">ようこそ、キツネ喫茶店へ</p>
+          <h1 className="hero-title">
+            JAPANESE SOUL,<br />
+            <span className="highlight">LOCAL HEART.</span>
+          </h1>
+          <p className="hero-desc">
+            A Japanese-inspired café serving comforting dishes<br />
+            and thoughtfully crafted coffee.
+          </p>
+          <div className="hero-buttons">
+            <a href="#menu" className="btn-primary">EXPLORE OUR MENU <img src={kitsuneIcon} alt="Kitsune" className="btn-icon" style={{ width: '20px', height: '20px', objectFit: 'contain' }} /></a>
+            <a href="#about" className="btn-secondary">OUR STORY <span className="btn-icon">➔</span></a>
+          </div>
+        </div>
       </section>
 
-      <section id="about" className="section">
-        <h2>About Us</h2>
-        <p>
-          Discover a serene oasis in the heart of Solano. At Kitsune Kissaten, we blend traditional Japanese 
-          brewing methods with modern culinary artistry. Our warm, minimalist interior—crafted with dark wood, 
-          burnt orange accents, and soft cream hues—invites you to slow down and savor the moment.
-        </p>
+      <section id="about" className="section our-story-section" style={{ backgroundImage: `url(${storyBg})` }}>
+        <div className="story-content-wrapper">
+          <div className="story-content">
+            <span className="story-subtitle"><span className="torii-icon"><img src={toriiIcon} alt="Torii Gate" style={{ height: '20px', width: 'auto', verticalAlign: 'middle' }} /></span> OUR STORY</span>
+            <h2>Inspired by Tradition,<br />Created with <span className="highlight">Heart.</span></h2>
+            <p>
+              Kistune Kissaten is more than just a café—<br />
+              it is a space where Japanese kissaten culture<br />
+              meets the warmth of home.
+            </p>
+            <p>
+              From our carefully brewed coffee to our<br />
+              comforting dishes, every detail is crafted to<br />
+              bring you a moment of calm, connection,<br />
+              and unforgettable flavors.
+            </p>
+          </div>
+          <div className="story-image-container">
+            <img src={heroImg} alt="Kitsune Kissaten" className="story-img" />
+          </div>
+        </div>
       </section>
 
-      <section id="menu" className="section menu-section">
-        <h2>Our Menu</h2>
-        <div className="menu-grid">
-          {menuItems.map((item, idx) => (
-            <div key={idx} className="menu-card">
-              <img src={item.photo || 'https://via.placeholder.com/150'} alt={item.name} className="menu-img"/>
-              <div className="menu-info">
-                <h3>{item.name}</h3>
-                <p className="desc">{item.description}</p>
-                <p className="price">₱{item.price}</p>
+      <section className="features-section">
+        <div className="features-container">
+          <div className="feature-box">
+            <div className="feature-icon-circle">🍲</div>
+            <h4>CRAFTED WITH PASSION</h4>
+            <p>We pour our heart into every cup and every dish.</p>
+          </div>
+          <div className="feature-box">
+            <div className="feature-icon-circle">🍜</div>
+            <h4>JAPANESE-INSPIRED</h4>
+            <p>Authentic flavors inspired by Japan's rich culinary heritage.</p>
+          </div>
+          <div className="feature-box">
+            <div className="feature-icon-circle">☕</div>
+            <h4>QUALITY INGREDIENTS</h4>
+            <p>We use carefully selected ingredients for the best taste.</p>
+          </div>
+          <div className="feature-box">
+            <div className="feature-icon-circle"><img src={kitsuneIcon} alt="Kitsune" style={{ width: '35px', height: '35px', objectFit: 'contain' }} /></div>
+            <h4>A COZY ESCAPE</h4>
+            <p>A welcoming place where you can relax and be yourself.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="menu" className="section menu-section" style={{ backgroundImage: `url(${menuBg})` }}>
+        <div className="menu-bg-decor">
+
+        </div>
+        <div className="menu-container">
+          {/* FOOD MENU SECTION */}
+          <div className="menu-category-group">
+            <h2 className="main-category-title">
+              <span className="title-line"></span> <span className="jp-accent">食</span> FOOD MENU <span className="title-line"></span>
+            </h2>
+            { /*<div className="category-icon-main"><img src={kitsuneIcon} alt="Kitsune" /></div>*/}
+
+            {/* CROISSANT */}
+            <div className="subcategory-section">
+              <h3 className="subcategory-title">CROISSANT</h3>
+              <div className="items-row scrollable-row">
+                {menuItems.filter(item => item.subcategory === "CROISSANT").map((item, idx) => (
+                  <div key={idx} className="menu-item-card">
+                    <div className="item-img-container">
+                      <img src={item.photo} alt={item.name} />
+                    </div>
+                    <div className="item-info">
+                      <p className="item-name">{item.name.toUpperCase()}</p>
+                      <p className="item-price">₱{item.price}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
-          {menuItems.length === 0 && <p>Our menu is currently being updated. Please check back later!</p>}
+
+            {/* PASTA */}
+            <div className="subcategory-section">
+              <h3 className="subcategory-title">PASTA</h3>
+              <div className="items-row scrollable-row">
+                {menuItems.filter(item => item.subcategory === "PASTA").map((item, idx) => (
+                  <div key={idx} className="menu-item-card">
+                    <div className="item-img-container">
+                      <img src={item.photo} alt={item.name} />
+                    </div>
+                    <div className="item-info">
+                      <p className="item-name">{item.name.toUpperCase()}</p>
+                      <p className="item-price">₱{item.price}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* BRUNCH SECTION */}
+          <div className="menu-category-group">
+            <h2 className="main-category-title">
+              <span className="title-line"></span> <span className="jp-accent">昼</span> BRUNCH <span className="title-line"></span>
+            </h2>
+            { /*<div className="category-icon-main"><img src={kitsuneIcon} alt="Kitsune" /></div>*/}
+
+            <div className="items-row scrollable-row">
+              {menuItems.filter(item => item.category === "BRUNCH").map((item, idx) => (
+                <div key={idx} className="menu-item-card">
+                  <div className="item-img-container">
+                    <img src={item.photo} alt={item.name} />
+                  </div>
+                  <div className="item-info">
+                    <p className="item-name">{item.name.toUpperCase()}</p>
+                    <p className="item-price">₱{item.price}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* DRINKS MENU SECTION */}
+          <div className="menu-category-group">
+            <h2 className="main-category-title">
+              <span className="title-line"></span> <span className="jp-accent">飲</span> DRINKS MENU <span className="title-line"></span>
+            </h2>
+            { /*<div className="category-icon-main"><img src={kitsuneIcon} alt="Kitsune" /></div>*/}
+
+            {/* KOHI */}
+            <div className="subcategory-section drinks-section">
+              <h3 className="subcategory-title">KŌHI (COFFEE)</h3>
+              <div className="items-row scrollable-row">
+                {menuItems.filter(item => item.subcategory === "KOHI (COFFEE)").map((item, idx) => (
+                  <div key={idx} className="menu-item-card">
+                    <div className="item-img-container">
+                      <img src={item.photo} alt={item.name} />
+                    </div>
+                    <div className="item-info">
+                      <p className="item-name">{item.name.toUpperCase()}</p>
+                      <p className="item-price">₱{item.price}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* MATCHA */}
+            <div className="subcategory-section drinks-section">
+              <h3 className="subcategory-title">MATCHA</h3>
+              <div className="items-row scrollable-row">
+                {menuItems.filter(item => item.subcategory === "MATCHA").map((item, idx) => (
+                  <div key={idx} className="menu-item-card">
+                    <div className="item-img-container">
+                      <img src={item.photo} alt={item.name} />
+                    </div>
+                    <div className="item-info">
+                      <p className="item-name">{item.name.toUpperCase()}</p>
+                      <p className="item-price">₱{item.price}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section id="location" className="section">
-        <h2>Location</h2>
-        <p>We are located at: <strong>Solano, Nueva Vizcaya</strong></p>
-        <p>Operating Hours: Mon - Sun | 8:00 AM - 9:00 PM</p>
+      <section id="location" className="section proudly-local">
+        <div className="local-container">
+          <div className="local-image">
+            <img src={heroImg} alt="Nueva Vizcaya" />
+          </div>
+          <div className="local-content">
+            <span className="local-subtitle">📍 PROUDLY LOCAL</span>
+            <h2>From Nueva Vizcaya,<br /><span className="highlight">For You.</span></h2>
+            <p>Rooted in the beauty and culture of Nueva Vizcaya,<br />
+              Kitsune Kissaten celebrates local community,<br />
+              warm hospitality, and the simple joys of<br />
+              good food and coffee.</p>
+          </div>
+          <div className="torii-illustration"><img src={toriiIcon} alt="Torii Gate" style={{ height: '120px', width: 'auto', opacity: 0.2 }} /></div>
+        </div>
       </section>
 
-      <footer className="footer">
-        <div className="socials">
-          <a href="#!">Facebook</a> | <a href="#!">Instagram</a> | <a href="#!">Twitter</a>
+      <footer id="contact" className="footer">
+        <div className="footer-container">
+          <div className="footer-brand">
+            <img src={logoImg} alt="Kitsune Logo" className="footer-logo" />
+            <p className="footer-tagline">Japanese Soul, Local Heart.</p>
+          </div>
+
+          <div className="footer-links-section">
+            <h4>CONNECT WITH US</h4>
+            <div className="footer-links-list">
+              <a href="https://www.facebook.com/kitsunekissaten/" target="_blank" rel="noopener noreferrer" className="footer-link">Facebook</a>
+              <a href="https://www.instagram.com/kitsunekissaten" target="_blank" rel="noopener noreferrer" className="footer-link">Instagram</a>
+              <a href="mailto:kitsunekissatenph@gmail.com" className="footer-link">Gmail</a>
+            </div>
+          </div>
         </div>
-        <p>&copy; {new Date().getFullYear()} Kitsune Kissaten. All Rights Reserved.</p>
+        <div className="footer-bottom">
+          <p>&copy; {new Date().getFullYear()} Kitsune Kissaten. All Rights Reserved.</p>
+        </div>
       </footer>
     </div>
   );

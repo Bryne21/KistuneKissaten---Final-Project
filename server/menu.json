@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "id": "app01",
+    "name": "Miso Soup",
+    "description": "Traditional Japanese soup with dashi, miso, tofu, and seaweed.",
+    "price": 120,
+    "photo": "https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80"
+  },
+  {
+    "id": "ramen01",
+    "name": "Shoyu Ramen",
+    "description": "Classic soy-based broth with curly noodles, chashu pork, and bamboo shoots.",
+    "price": 350,
+    "photo": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+  },
+  {
+    "id": "drink01",
+    "name": "Matcha Latte",
+    "description": "Ceremonial grade matcha whisked with creamy steamed milk.",
+    "price": 180,
+    "photo": "https://images.unsplash.com/photo-1515823064-d6e0c04616a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80"
+  }
+]

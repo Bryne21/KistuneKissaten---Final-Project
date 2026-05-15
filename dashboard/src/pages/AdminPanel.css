@@ -1,56 +1,189 @@
+/* AdminPanel.css */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --burnt-orange: #D35400;
+  --dark-wood: #1A100C;
+  --cream: #EADAC2;
+  --text-dark: #3A2E28;
+  --text-light: #BBAA99;
+}
+
 .admin-theme {
   background-color: var(--cream);
   min-height: 100vh;
-}
-
-.admin-header {
-  background-color: var(--dark-wood);
-  color: var(--cream);
-  padding: 1rem 2rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
 }
 
-.admin-header h2 {
-  margin: 0;
-  color: var(--burnt-orange);
+/* Fix Navbar for Dashboard */
+.admin-theme .navbar {
+  position: relative;
+  background-color: var(--dark-wood);
+  padding: 1rem 4rem;
+  margin-bottom: 2rem;
 }
 
-.home-link {
+.admin-theme .logo-en {
   color: var(--cream);
-  text-decoration: underline;
+}
+
+.admin-theme .main-nav a {
+  color: var(--cream);
+}
+
+.signout-btn {
+  background: none;
+  border: none;
+  color: var(--cream) !important;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+.signout-btn:hover {
+  color: var(--burnt-orange) !important;
 }
 
 .main {
   display: flex;
   flex-wrap: wrap;
-  padding: 2rem;
+  padding: 0 4rem 4rem 4rem;
   gap: 2rem;
   align-items: flex-start;
 }
 
 .AddMenuForm {
   flex: 1;
-  min-width: 300px;
+  min-width: 320px;
   background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   border-top: 5px solid var(--burnt-orange);
+}
+
+.AddMenuForm h1 {
+  font-family: 'Playfair Display', serif;
+  color: var(--text-dark);
+  font-size: 2rem;
+  margin-bottom: 2rem;
 }
 
 .Preview {
   flex: 2;
-  min-width: 500px;
+  min-width: 600px;
   background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-@media (max-width: 768px) {
+.Preview h1 {
+  font-family: 'Playfair Display', serif;
+  color: var(--text-dark);
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Table Styling */
+.MuiTable-root {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.MuiTableHead-root .MuiTableCell-root {
+  font-weight: 700;
+  color: var(--text-dark);
+  border-bottom: 2px solid var(--cream);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.MuiTableBody-root .MuiTableRow-root {
+  background-color: #fafafa;
+  transition: transform 0.2s;
+}
+
+.MuiTableBody-root .MuiTableRow-root:hover {
+  transform: scale(1.01);
+  background-color: #fff;
+}
+
+.MuiTableBody-root .MuiTableCell-root {
+  border: none;
+  color: #555;
+  padding: 1rem;
+}
+
+.MuiTableBody-root .MuiTableCell-root:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.MuiTableBody-root .MuiTableCell-root:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/* Form Elements */
+.MuiTextField-root .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--burnt-orange);
+}
+
+.MuiInputLabel-root.Mui-focused {
+  color: var(--burnt-orange);
+}
+
+.btn-admin {
+  background-color: var(--burnt-orange) !important;
+  color: white !important;
+  padding: 0.8rem 2rem !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  text-transform: none !important;
+  letter-spacing: 1px !important;
+}
+
+.btn-admin-secondary {
+  background-color: var(--dark-wood) !important;
+  color: white !important;
+  padding: 0.8rem 2rem !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  text-transform: none !important;
+  letter-spacing: 1px !important;
+}
+
+.btn-edit {
+  color: var(--burnt-orange) !important;
+  border-color: var(--burnt-orange) !important;
+}
+
+.btn-delete {
+  color: #e74c3c !important;
+  border-color: #e74c3c !important;
+}
+
+@media (max-width: 1024px) {
   .main {
     flex-direction: column;
+    padding: 0 2rem 2rem 2rem;
+  }
+  
+  .Preview, .AddMenuForm {
+    width: 100%;
+    min-width: 0;
+  }
+  
+  .admin-theme .navbar {
+    padding: 1rem 2rem;
   }
 }

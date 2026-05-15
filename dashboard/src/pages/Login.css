@@ -1,0 +1,94 @@
+/* Login.css */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --burnt-orange: #D35400;
+  --dark-wood: #1A100C;
+  --cream: #EADAC2;
+  --text-dark: #3A2E28;
+  --text-light: #BBAA99;
+}
+
+.login-background {
+  background-color: var(--dark-wood);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.login-card {
+  background-color: var(--cream);
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+  width: 100%;
+  max-width: 450px;
+  border-top: 6px solid var(--burnt-orange);
+}
+
+.login-title {
+  color: var(--text-dark);
+  margin-bottom: 2rem !important;
+  font-weight: 700 !important;
+  text-align: center;
+  font-family: 'Playfair Display', serif !important;
+  font-size: 2.5rem !important;
+}
+
+/* Material UI Overrides */
+.MuiTextField-root .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--burnt-orange) !important;
+}
+
+.MuiInputLabel-root.Mui-focused {
+  color: var(--burnt-orange) !important;
+}
+
+.login-button {
+  background-color: var(--burnt-orange) !important;
+  color: white !important;
+  padding: 0.8rem !important;
+  font-weight: 600 !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1.5rem !important;
+  transition: background-color 0.3s ease !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.login-button:hover {
+  background-color: #A04000 !important;
+}
+
+.login-link {
+  color: var(--burnt-orange) !important;
+  text-decoration: none !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  transition: color 0.2s ease !important;
+}
+
+.login-link:hover {
+  color: var(--text-dark) !important;
+}
+
+.back-link {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin-top: 2rem;
+  display: block;
+  text-align: center;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--cream);
+}

@@ -6,8 +6,26 @@ const multer = require('multer'); // Import multer
 const mongoose = require("mongoose");
 const app = express();
 
-const User = require("./model/user.model");
-const Menu = require("./model/menu.model");
+// --- MODELS ---
+const userSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true }
+});
+
+const User = mongoose.model("User", userSchema);
+
+const menuSchema = new mongoose.Schema({
+    id: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
+    description: { type: String },
+    price: { type: Number, required: true },
+    photo: { type: String },
+    category: { type: String },
+    subcategory: { type: String }
+});
+
+const Menu = mongoose.model("Menu", menuSchema);
 
 app.use(cors());
 app.use(express.json());
@@ -15,7 +33,9 @@ app.use(express.json());
 // dc connection
 mongoose
     .connect("mongodb://127.0.0.1:27017/KistuneDB")
-    .then(() => console.log("Connected to MongoDB"))
+    .then(() => {
+        console.log("Connected to MongoDB (KistuneDB)");
+    })
     .catch((err) => console.error("Connection error:", err));
 
 // 1. Serve the 'uploads' folder statically
@@ -57,7 +77,9 @@ app.post("/add-menu", upload.single('photo'), async (req, res) => {
             name: menuData.name,
             description: menuData.description,
             price: menuData.price,
-            photo: photoUrl
+            photo: photoUrl,
+            category: menuData.category,
+            subcategory: menuData.subcategory
         });
 
         await newMenu.save();
@@ -149,6 +171,38 @@ app.get("/users-db", async (req, res) => {
     } catch (error) {
         console.error("Error fetching users from database: ", error);
         res.status(500).json({ message: "Error fetching users from database" })
+    }
+});
+
+// --- LOGIN ROUTE ---
+
+app.post("/login", async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res
+                .status(400)
+                .json({ message: "Email and password are required." });
+        }
+
+        const user = await User.findOne({ email });
+
+        if (!user || user.password !== password) {
+            return res.status(401).json({ message: "Invalid email or password." });
+        }
+
+        res.json({
+            message: "Login successful",
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+            },
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error logging in");
     }
 });
 

@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { 
     TextField, Button, Table, TableBody, TableRow, TableCell, 
-    TableHead, TableContainer, Avatar
+    TableHead, TableContainer, Avatar, Box, Typography, MenuItem
 } from "@mui/material";
 import './AdminPanel.css';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import logoImg from '../assets/kistunelogo.png';
 
 function AdminPanel() {
     // Menu States
@@ -13,6 +14,9 @@ function AdminPanel() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
+    const [category, setCategory] = useState('');
+    const [subcategory, setSubcategory] = useState('');
+    const [locationLabel, setLocationLabel] = useState('');
     const [selectedFile, setSelectedFile] = useState(null);
     const [imagePreview, setImagePreview] = useState(null);
     const [menuList, setMenuList] = useState([]);
@@ -23,6 +27,34 @@ function AdminPanel() {
     const [userName, setUserName] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const [userPassword, setUserPassword] = useState('');
+
+    const isAuthenticated = !!localStorage.getItem("token");
+
+    const locations = [
+        { label: "Croissants", category: "FOOD MENU", subcategory: "CROISSANT" },
+        { label: "Pastas", category: "FOOD MENU", subcategory: "PASTA" },
+        { label: "Brunch", category: "BRUNCH", subcategory: "" },
+        { label: "Kohi (Coffee)", category: "DRINKS MENU", subcategory: "KOHI (COFFEE)" },
+        { label: "Matcha", category: "DRINKS MENU", subcategory: "MATCHA" }
+    ];
+
+    const handleLocationChange = (val) => {
+        setLocationLabel(val);
+        const loc = locations.find(l => l.label === val);
+        if (loc) {
+            setCategory(loc.category);
+            setSubcategory(loc.subcategory);
+        } else {
+            setCategory('');
+            setSubcategory('');
+        }
+    };
+
+    const handleSignOut = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.location.href = "/";
+    };
 
     function fetchMenu() {
         axios.get("http://localhost:1337/menu")
@@ -46,6 +78,9 @@ function AdminPanel() {
         setName('');
         setDescription('');
         setPrice('');
+        setCategory('');
+        setSubcategory('');
+        setLocationLabel('');
         setSelectedFile(null);
         setImagePreview(null);
         setEditIndex(null);
@@ -60,8 +95,8 @@ function AdminPanel() {
     };
 
     const validateForm = () => {
-        if (!menuId || !name || !description || !price) {
-            alert("Error: Please fill in all required fields.");
+        if (!menuId || !name || !price || !category) {
+            alert("Error: Please fill in all required fields (ID, Name, Price, Location).");
             return false;
         }
         return true;
@@ -70,10 +105,14 @@ function AdminPanel() {
     const handleEdit = (menu) => {
         setMenuId(menu.id);
         setName(menu.name);
-        setDescription(menu.description);
+        setDescription(menu.description || '');
         setPrice(menu.price);
+        setCategory(menu.category || '');
+        setSubcategory(menu.subcategory || '');
+        const loc = locations.find(l => l.category === menu.category && l.subcategory === menu.subcategory);
+        setLocationLabel(loc ? loc.label : '');
         setImagePreview(menu.photo);
-        setEditIndex(menu.id); // store the ID instead of array index
+        setEditIndex(menu.id);
     };
 
     async function handleAddMenu() {
@@ -86,11 +125,14 @@ function AdminPanel() {
         }
 
         const formData = new FormData();
-        const menuData = {
-            id: menuId,
-            name: name,
-            description: description,
-            price: price
+        // Ensure price is a number
+        const menuData = { 
+            id: menuId, 
+            name, 
+            description, 
+            price: Number(price), 
+            category, 
+            subcategory 
         };
 
         formData.append("menuData", JSON.stringify(menuData));
@@ -99,15 +141,15 @@ function AdminPanel() {
         }
 
         try {
-            await axios.post("http://localhost:1337/add-menu", formData, {
+            const response = await axios.post("http://localhost:1337/add-menu", formData, {
                 headers: { "Content-Type": "multipart/form-data" }
             });
-            
-            alert("Menu Added Successfully");
+            alert("Menu Added Successfully to MongoDB!");
             clearForm();
             fetchMenu();
         } catch (error) {
-            console.error(error);
+            console.error("Add Error:", error);
+            alert("Failed to add menu. " + (error.response?.data || "Check server connection."));
         }
     }
 
@@ -115,11 +157,13 @@ function AdminPanel() {
         if (!validateForm()) return;
 
         const formData = new FormData();
-        const menuData = {
-            id: menuId,
-            name: name,
-            description: description,
-            price: price
+        const menuData = { 
+            id: menuId, 
+            name, 
+            description, 
+            price: Number(price), 
+            category, 
+            subcategory 
         };
 
         formData.append("menuData", JSON.stringify(menuData));
@@ -131,12 +175,12 @@ function AdminPanel() {
             await axios.put(`http://localhost:1337/edit-menu/${editIndex}`, formData, {
                 headers: { "Content-Type": "multipart/form-data" }
             });
-            
-            alert("Menu Updated Successfully");
+            alert("Menu Updated Successfully in MongoDB!");
             clearForm();
             fetchMenu();
         } catch (error) {
-            console.error("Error updating menu:", error);
+            console.error("Update Error:", error);
+            alert("Failed to update menu. " + (error.response?.data || "Check server connection."));
         }
     }
 
@@ -158,14 +202,10 @@ function AdminPanel() {
         }
         try {
             await axios.post("http://localhost:1337/add-user-db", {
-                name: userName,
-                email: userEmail,
-                password: userPassword
+                name: userName, email: userEmail, password: userPassword
             });
             alert("User added successfully!");
-            setUserName('');
-            setUserEmail('');
-            setUserPassword('');
+            setUserName(''); setUserEmail(''); setUserPassword('');
             fetchUsers();
         } catch (err) {
             console.error(err);
@@ -173,69 +213,100 @@ function AdminPanel() {
     }
 
     return (
-        <div className="main-container admin-theme">
-            <header className="admin-header">
-                <h2>Admin Dashboard</h2>
-                <Link to="/" className="home-link">Back to Website</Link>
+        <div className="admin-theme">
+            <header className="navbar">
+                <div className="logo-container">
+                    <div className="logo-circle">
+                        <img src={logoImg} alt="Fox Logo" className="nav-logo" />
+                    </div>
+                    <div className="logo-text">
+                        <span className="logo-jp">キツネ喫茶店</span>
+                        <span className="logo-en">KITSUNE KISSATEN</span>
+                        <span className="logo-loc">SOLANO, NUEVA VIZCAYA</span>
+                    </div>
+                </div>
+                <nav className="main-nav">
+                    <Link to="/#home">HOME</Link>
+                    <Link to="/#menu">MENU</Link>
+                    <Link to="/#about">ABOUT US</Link>
+                    <Link to="/#contact">CONTACT</Link>
+                    
+                    {isAuthenticated ? (
+                        <>
+                            <Link to="/students" className="active">ADMIN</Link>
+                            <button onClick={handleSignOut} className="signout-btn">SIGN OUT</button>
+                        </>
+                    ) : (
+                        <Link to="/login">LOGIN</Link>
+                    )}
+                </nav>
             </header>
+
             <div className="main">
-                {/* MENU MANAGEMENT SECTION */}
                 <div className="AddMenuForm">
                     <h1>{editIndex !== null ? "Edit Menu Item" : "Add Menu Item"}</h1>
                     
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '10px' }}>
-                        <Avatar src={imagePreview} sx={{ width: 80, height: 80, mb: 1 }} variant="rounded" />
-                        <Button variant="outlined" component="label" size="small" sx={{ color: 'var(--burnt-orange)', borderColor: 'var(--burnt-orange)' }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '2rem' }}>
+                        <Avatar src={imagePreview} sx={{ width: 100, height: 100, mb: 2, border: '2px solid #EADAC2' }} variant="rounded" />
+                        <Button variant="outlined" component="label" size="small" className="btn-edit">
                             Upload Photo
                             <input type="file" hidden accept="image/*" onChange={handleFileChange} />
                         </Button>
-                    </div>
+                    </Box>
 
                     <TextField 
-                        label="Item ID" fullWidth margin="normal" required
-                        value={menuId} type="text" disabled={editIndex !== null}
-                        onChange={(e) => setMenuId(e.target.value)}
-                    />
+                        select 
+                        label="Menu Location" 
+                        fullWidth 
+                        margin="normal" 
+                        value={locationLabel} 
+                        onChange={(e) => handleLocationChange(e.target.value)}
+                    >
+                        {locations.map((loc) => (
+                            <MenuItem key={loc.label} value={loc.label}>{loc.label}</MenuItem>
+                        ))}
+                    </TextField>
+
+                    <TextField label="Item ID" fullWidth margin="normal" value={menuId} disabled={editIndex !== null} onChange={(e) => setMenuId(e.target.value)} />
+                    <TextField label="Name" fullWidth margin="normal" value={name} onChange={(e) => setName(e.target.value)} />
+                    <TextField label="Description" fullWidth margin="normal" multiline rows={3} value={description} onChange={(e) => setDescription(e.target.value)} />
+                    <TextField label="Price" fullWidth margin="normal" value={price} type="number" onChange={(e) => setPrice(e.target.value)} />
                     
-                    <TextField label="Name" fullWidth margin="normal" required value={name} onChange={(e) => setName(e.target.value)} />
-                    <TextField label="Description" fullWidth margin="normal" multiline rows={3} required value={description} onChange={(e) => setDescription(e.target.value)} />
-                    <TextField label="Price" fullWidth margin="normal" required value={price} type="number" onChange={(e) => setPrice(e.target.value)} />
-                    
-                    <div style={{ marginTop: '20px' }}>
+                    <Box sx={{ mt: 3, display: 'flex', gap: 2 }}>
                         {editIndex === null ? (
-                            <Button variant="contained" sx={{ bgcolor: 'var(--burnt-orange)' }} onClick={handleAddMenu}>Add Menu</Button>
+                            <Button variant="contained" className="btn-admin" onClick={handleAddMenu}>Add Menu</Button>
                         ) : (
-                            <Button variant="contained" sx={{ bgcolor: 'var(--dark-wood)' }} onClick={handleUpdateMenu}>Update Menu</Button>
+                            <Button variant="contained" className="btn-admin-secondary" onClick={handleUpdateMenu}>Update Menu</Button>
                         )}
-                        {editIndex !== null && <Button variant="text" onClick={clearForm} style={{ marginLeft: '10px' }}>Cancel</Button>}
-                    </div>
+                        {editIndex !== null && <Button variant="text" onClick={clearForm} sx={{ color: '#888' }}>Cancel</Button>}
+                    </Box>
                 </div>
 
                 <div className="Preview">
                     <h1>Menu List</h1>
-                    <TableContainer>
-                        <Table>
+                    <TableContainer sx={{ maxHeight: 600 }}>
+                        <Table stickyHeader>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell><strong>Photo</strong></TableCell>
-                                    <TableCell><strong>ID</strong></TableCell>
-                                    <TableCell><strong>Name</strong></TableCell>
-                                    <TableCell><strong>Description</strong></TableCell>
-                                    <TableCell><strong>Price</strong></TableCell>
-                                    <TableCell><strong>Edit</strong></TableCell>
-                                    <TableCell><strong>Delete</strong></TableCell>
+                                    <TableCell>Photo</TableCell>
+                                    <TableCell>ID</TableCell>
+                                    <TableCell>Location</TableCell>
+                                    <TableCell>Name</TableCell>
+                                    <TableCell>Price</TableCell>
+                                    <TableCell>Edit</TableCell>
+                                    <TableCell>Delete</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {menuList.map((m, index) => (
-                                    <TableRow key={m.id || index}>
-                                        <TableCell><Avatar src={m.photo} variant="rounded" /></TableCell>
-                                        <TableCell>{m.id}</TableCell>
+                                {menuList.map((m) => (
+                                    <TableRow key={m.id}>
+                                        <TableCell><Avatar src={m.photo} variant="rounded" sx={{ width: 50, height: 50 }} /></TableCell>
+                                        <TableCell><Typography variant="body2" sx={{ fontWeight: 600 }}>{m.id}</Typography></TableCell>
+                                        <TableCell>{m.subcategory || m.category}</TableCell>
                                         <TableCell>{m.name}</TableCell>
-                                        <TableCell>{m.description}</TableCell>
-                                        <TableCell>₱{m.price}</TableCell>
-                                        <TableCell><Button variant="outlined" onClick={() => handleEdit(m)}>Edit</Button></TableCell>
-                                        <TableCell><Button variant="outlined" color="error" onClick={() => handleDelete(m.id)}>Delete</Button></TableCell>
+                                        <TableCell sx={{ fontWeight: 700, color: '#D35400' }}>₱{m.price}</TableCell>
+                                        <TableCell><Button variant="outlined" size="small" className="btn-edit" onClick={() => handleEdit(m)}>Edit</Button></TableCell>
+                                        <TableCell><Button variant="outlined" size="small" className="btn-delete" onClick={() => handleDelete(m.id)}>Delete</Button></TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -243,29 +314,28 @@ function AdminPanel() {
                     </TableContainer>
                 </div>
 
-                {/* USER MANAGEMENT SECTION */}
-                <div className="AddMenuForm" style={{ marginTop: '2rem' }}>
+                <div className="AddMenuForm">
                     <h1>Add User</h1>
-                    <TextField label="Name" fullWidth margin="normal" required value={userName} onChange={(e) => setUserName(e.target.value)} />
-                    <TextField label="Email" fullWidth margin="normal" required value={userEmail} onChange={(e) => setUserEmail(e.target.value)} />
-                    <TextField label="Password" type="password" fullWidth margin="normal" required value={userPassword} onChange={(e) => setUserPassword(e.target.value)} />
-                    <Button variant="contained" sx={{ bgcolor: 'var(--burnt-orange)', mt: 2 }} onClick={handleAddUser}>Add User</Button>
+                    <TextField label="Name" fullWidth margin="normal" value={userName} onChange={(e) => setUserName(e.target.value)} />
+                    <TextField label="Email" fullWidth margin="normal" value={userEmail} onChange={(e) => setUserEmail(e.target.value)} />
+                    <TextField label="Password" type="password" fullWidth margin="normal" value={userPassword} onChange={(e) => setUserPassword(e.target.value)} />
+                    <Button variant="contained" className="btn-admin" sx={{ mt: 2 }} onClick={handleAddUser}>Add User</Button>
                 </div>
                 
-                <div className="Preview" style={{ marginTop: '2rem' }}>
+                <div className="Preview">
                     <h1>User List</h1>
                     <TableContainer>
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell><strong>Name</strong></TableCell>
-                                    <TableCell><strong>Email</strong></TableCell>
+                                    <TableCell>Name</TableCell>
+                                    <TableCell>Email</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {users.map((u, i) => (
                                     <TableRow key={i}>
-                                        <TableCell>{u.name}</TableCell>
+                                        <TableCell sx={{ fontWeight: 600 }}>{u.name}</TableCell>
                                         <TableCell>{u.email}</TableCell>
                                     </TableRow>
                                 ))}
@@ -273,7 +343,6 @@ function AdminPanel() {
                         </Table>
                     </TableContainer>
                 </div>
-
             </div>
         </div>
     );
