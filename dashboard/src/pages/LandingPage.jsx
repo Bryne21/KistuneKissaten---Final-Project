@@ -269,7 +269,67 @@ function LandingPage() {
         </div>
       </section>
 
-      <footer id="contact" className="footer">
+      <section id="contact" className="section contact-section">
+        <div className="contact-container">
+          <div className="contact-header">
+            <span className="decorative-line"></span>
+            <h2>CONTACT</h2>
+            <span className="decorative-line"></span>
+          </div>
+
+          <div className="contact-grid">
+            <div className="contact-info-box">
+              <div className="info-icon">📞</div>
+              <div className="info-text">
+                <h4>CALL US</h4>
+                <p>+63 912 345 6789</p>
+              </div>
+            </div>
+
+            <div className="contact-info-box">
+              <div className="info-icon">✉️</div>
+              <div className="info-text">
+                <h4>EMAIL US</h4>
+                <p>kitsunekissatenph@gmail.com</p>
+              </div>
+            </div>
+
+            <div className="contact-info-box">
+              <div className="info-icon">🕒</div>
+              <div className="info-text">
+                <h4>OPEN DAILY</h4>
+                <p>Mon - Sun<br />8:00 AM - 10:00 PM</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="contact-footer">
+            <div className="follow-header">
+              <span className="decorative-line-small"></span>
+              <h3>FOLLOW US</h3>
+              <span className="decorative-line-small"></span>
+            </div>
+            <div className="social-links-container">
+              <a href="https://www.facebook.com/kitsunekissaten/" target="_blank" rel="noopener noreferrer" className="specific-social-link">
+                <span className="platform">FACEBOOK</span>
+                <span className="handle">/kitsunekissaten</span>
+              </a>
+              <span className="social-divider"></span>
+              <a href="https://www.instagram.com/kitsunekissaten" target="_blank" rel="noopener noreferrer" className="specific-social-link">
+                <span className="platform">INSTAGRAM</span>
+                <span className="handle">@kitsunekissaten</span>
+              </a>
+              <span className="social-divider"></span>
+              <a href="mailto:kitsunekissatenph@gmail.com" className="specific-social-link">
+                <span className="platform">GMAIL</span>
+                <span className="handle">kitsunekissatenph@gmail.com</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className="footer">
         <div className="footer-container">
           <div className="footer-brand">
             <img src={logoImg} alt="Kitsune Logo" className="footer-logo" />
