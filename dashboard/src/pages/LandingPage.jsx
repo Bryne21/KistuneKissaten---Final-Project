@@ -43,7 +43,7 @@ function LandingPage() {
         </div>
         <nav className="main-nav">
           <a href="#home">HOME</a>
-          <a href="#menu">MENU</a>
+          <a href="#menu-food">MENU</a>
           <a href="#about">ABOUT US</a>
           <a href="#contact">CONTACT</a>
 
@@ -85,7 +85,7 @@ function LandingPage() {
             and thoughtfully crafted coffee.
           </p>
           <div className="hero-buttons">
-            <a href="#menu" className="btn-primary">EXPLORE OUR MENU <img src={kitsuneIcon} alt="Kitsune" className="btn-icon" style={{ width: '20px', height: '20px', objectFit: 'contain' }} /></a>
+            <a href="#menu-food" className="btn-primary">EXPLORE OUR MENU <img src={kitsuneIcon} alt="Kitsune" className="btn-icon" style={{ width: '20px', height: '20px', objectFit: 'contain' }} /></a>
             <a href="#about" className="btn-secondary">OUR STORY <span className="btn-icon">➔</span></a>
           </div>
         </div>
@@ -139,10 +139,8 @@ function LandingPage() {
         </div>
       </section>
 
-      <section id="menu" className="section menu-section" style={{ backgroundImage: `url(${newMenuBg})` }}>
-        <div className="menu-bg-decor">
-
-        </div>
+      <section id="menu-food" className="section menu-section" style={{ backgroundImage: `url(${menuBg})` }}>
+        <div className="menu-bg-decor"></div>
         <div className="menu-container">
           {/* FOOD MENU SECTION */}
           <div className="menu-category-group">
@@ -212,7 +210,12 @@ function LandingPage() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
 
+      <section id="menu-drinks" className="section menu-section" style={{ backgroundImage: `url(${newMenuBg})` }}>
+        <div className="menu-bg-decor"></div>
+        <div className="menu-container">
           {/* DRINKS MENU SECTION */}
           <div className="menu-category-group">
             <h2 className="main-category-title">

@@ -477,6 +477,7 @@
   background-color: #0a0502;
   background-size: cover;
   background-position: center top;
+  background-attachment: fixed;
   padding: 1rem 0;
   /* Reduced from 1.5rem */
   color: #EADAC2;

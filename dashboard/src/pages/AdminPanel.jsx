@@ -265,7 +265,7 @@ function AdminPanel() {
                 </div>
                 <nav className="main-nav">
                     <Link to="/#home">HOME</Link>
-                    <Link to="/#menu">MENU</Link>
+                    <Link to="/#menu-food">MENU</Link>
                     <Link to="/#about">ABOUT US</Link>
                     <Link to="/#contact">CONTACT</Link>
                     {isAuthenticated ? (
