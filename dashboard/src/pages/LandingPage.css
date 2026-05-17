@@ -343,9 +343,8 @@
   padding: 3rem 0; /* Reduced from 6rem */
   text-align: left;
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   background-repeat: no-repeat;
-  background-attachment: fixed;
   overflow: hidden;
 }
 
@@ -514,9 +513,7 @@
   position: relative;
   background-color: #0a0502;
   background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  /* Parallax effect restored */
+  background-position: center top;
   padding: 1rem 0;
   /* Reduced from 1.5rem */
   color: #EADAC2;
