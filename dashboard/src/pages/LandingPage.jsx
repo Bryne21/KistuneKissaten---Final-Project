@@ -186,7 +186,12 @@ function LandingPage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
+      <section id="menu-brunch" className="section menu-section" style={{ backgroundImage: `url(${secondMainImg})` }}>
+        <div className="menu-bg-decor"></div>
+        <div className="menu-container">
           {/* BRUNCH SECTION */}
           <div className="menu-category-group">
             <h2 className="main-category-title">
