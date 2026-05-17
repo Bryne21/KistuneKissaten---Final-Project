@@ -474,17 +474,16 @@
 /* Menu Section */
 .menu-section {
   position: relative;
-  background-color: #1A100C;
-  background-image: 
-    radial-gradient(circle at 50% 0%, rgba(211, 84, 0, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 100% 100%, rgba(211, 84, 0, 0.05) 0%, transparent 40%),
-    linear-gradient(rgba(10, 5, 2, 0.9), rgba(10, 5, 2, 0.95));
+  background-color: #0a0502;
+  background-size: cover;
+  background-position: center top;
   padding: 1rem 0;
+  /* Reduced from 1.5rem */
   color: #EADAC2;
   overflow: hidden;
 }
 
-/* Background Texture Pattern */
+/* Background Dark Overlay for readability */
 .menu-section::before {
   content: '';
   position: absolute;
@@ -492,10 +491,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
-    linear-gradient(rgba(211, 84, 0, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(211, 84, 0, 0.03) 1px, transparent 1px);
-  background-size: 30px 30px;
+  background: linear-gradient(to bottom,
+      rgba(10, 5, 2, 0.95) 0%,
+      rgba(10, 5, 2, 0.6) 20%,
+      rgba(10, 5, 2, 0.6) 80%,
+      rgba(10, 5, 2, 0.95) 100%);
   pointer-events: none;
   z-index: 1;
 }

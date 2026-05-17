@@ -8,6 +8,7 @@ import kitsuneIcon from '../Icons/kitsune.png';
 import toriiIcon from '../Icons/torii-gate.png';
 import menuBg from '../assets/menu_bg.png';
 import storyBg from '../assets/story_bg.png';
+import newMenuBg from '../assets/new_menu_bg.png';
 import soupIcon from '../assets/soup.png';
 import communicationIcon from '../assets/communication.png';
 import clockIcon from '../assets/clock.png';
@@ -138,7 +139,7 @@ function LandingPage() {
         </div>
       </section>
 
-      <section id="menu" className="section menu-section">
+      <section id="menu" className="section menu-section" style={{ backgroundImage: `url(${newMenuBg})` }}>
         <div className="menu-bg-decor">
 
         </div>
