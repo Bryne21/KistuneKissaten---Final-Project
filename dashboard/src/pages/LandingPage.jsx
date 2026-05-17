@@ -8,6 +8,9 @@ import kitsuneIcon from '../Icons/kitsune.png';
 import toriiIcon from '../Icons/torii-gate.png';
 import menuBg from '../assets/menu_bg.png';
 import storyBg from '../assets/story_bg.png';
+import soupIcon from '../assets/soup.png';
+import communicationIcon from '../assets/communication.png';
+import clockIcon from '../assets/clock.png';
 import './LandingPage.css';
 
 function LandingPage() {
@@ -38,7 +41,7 @@ function LandingPage() {
           </div>
         </div>
         <nav className="main-nav">
-          <a href="#home" className="active">HOME</a>
+          <a href="#home">HOME</a>
           <a href="#menu">MENU</a>
           <a href="#about">ABOUT US</a>
           <a href="#contact">CONTACT</a>
@@ -118,7 +121,7 @@ function LandingPage() {
             <p>We pour our heart into every cup and every dish.</p>
           </div>
           <div className="feature-box">
-            <div className="feature-icon-circle">🍜</div>
+            <div className="feature-icon-circle"><img src={soupIcon} alt="Soup" style={{ width: '40px', height: '40px', objectFit: 'contain' }} /></div>
             <h4>JAPANESE-INSPIRED</h4>
             <p>Authentic flavors inspired by Japan's rich culinary heritage.</p>
           </div>
@@ -158,6 +161,7 @@ function LandingPage() {
                     </div>
                     <div className="item-info">
                       <p className="item-name">{item.name.toUpperCase()}</p>
+                      <p className="item-desc">{item.description}</p>
                       <p className="item-price">₱{item.price}</p>
                     </div>
                   </div>
@@ -176,6 +180,7 @@ function LandingPage() {
                     </div>
                     <div className="item-info">
                       <p className="item-name">{item.name.toUpperCase()}</p>
+                      <p className="item-desc">{item.description}</p>
                       <p className="item-price">₱{item.price}</p>
                     </div>
                   </div>
@@ -199,6 +204,7 @@ function LandingPage() {
                   </div>
                   <div className="item-info">
                     <p className="item-name">{item.name.toUpperCase()}</p>
+                    <p className="item-desc">{item.description}</p>
                     <p className="item-price">₱{item.price}</p>
                   </div>
                 </div>
@@ -224,6 +230,7 @@ function LandingPage() {
                     </div>
                     <div className="item-info">
                       <p className="item-name">{item.name.toUpperCase()}</p>
+                      <p className="item-desc">{item.description}</p>
                       <p className="item-price">₱{item.price}</p>
                     </div>
                   </div>
@@ -242,6 +249,7 @@ function LandingPage() {
                     </div>
                     <div className="item-info">
                       <p className="item-name">{item.name.toUpperCase()}</p>
+                      <p className="item-desc">{item.description}</p>
                       <p className="item-price">₱{item.price}</p>
                     </div>
                   </div>
@@ -287,7 +295,7 @@ function LandingPage() {
             </div>
 
             <div className="contact-info-box">
-              <div className="info-icon">✉️</div>
+              <div className="info-icon"><img src={communicationIcon} alt="Email" style={{ width: '35px', height: '35px', objectFit: 'contain' }} /></div>
               <div className="info-text">
                 <h4>EMAIL US</h4>
                 <p>kitsunekissatenph@gmail.com</p>
@@ -295,7 +303,7 @@ function LandingPage() {
             </div>
 
             <div className="contact-info-box">
-              <div className="info-icon">🕒</div>
+              <div className="info-icon"><img src={clockIcon} alt="Clock" style={{ width: '35px', height: '35px', objectFit: 'contain' }} /></div>
               <div className="info-text">
                 <h4>OPEN DAILY</h4>
                 <p>Mon - Sun<br />8:00 AM - 10:00 PM</p>
@@ -330,21 +338,6 @@ function LandingPage() {
       </section>
 
       <footer className="footer">
-        <div className="footer-container">
-          <div className="footer-brand">
-            <img src={logoImg} alt="Kitsune Logo" className="footer-logo" />
-            <p className="footer-tagline">Japanese Soul, Local Heart.</p>
-          </div>
-
-          <div className="footer-links-section">
-            <h4>CONNECT WITH US</h4>
-            <div className="footer-links-list">
-              <a href="https://www.facebook.com/kitsunekissaten/" target="_blank" rel="noopener noreferrer" className="footer-link">Facebook</a>
-              <a href="https://www.instagram.com/kitsunekissaten" target="_blank" rel="noopener noreferrer" className="footer-link">Instagram</a>
-              <a href="mailto:kitsunekissatenph@gmail.com" className="footer-link">Gmail</a>
-            </div>
-          </div>
-        </div>
         <div className="footer-bottom">
           <p>&copy; {new Date().getFullYear()} Kitsune Kissaten. All Rights Reserved.</p>
         </div>
