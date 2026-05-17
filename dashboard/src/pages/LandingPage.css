@@ -8,41 +8,6 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* Simple animations for sections */
-.section {
-  opacity: 0;
-  animation: fadeInSlideUp 0.8s ease-out forwards;
-}
-
-@keyframes fadeInSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Add slight animation delays so sections don't load all at once */
-#about {
-  animation-delay: 0.2s;
-}
-
-.features-section {
-  opacity: 0;
-  animation: fadeInSlideUp 0.8s ease-out 0.4s forwards;
-}
-
-#menu {
-  animation-delay: 0.2s;
-}
-
-#contact {
-  animation-delay: 0.2s;
-}
-
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -50,7 +15,8 @@
   padding: 1.2rem 4rem;
   background-color: transparent;
   color: #EADAC2;
-  position: fixed; /* Changed from sticky to fixed to float over background */
+  position: fixed;
+  /* Changed from sticky to fixed to float over background */
   top: 0;
   left: 0;
   width: 100%;
@@ -152,13 +118,6 @@
   align-items: center;
   padding: 0 4rem;
   box-sizing: border-box;
-  opacity: 0;
-  animation: fadeIn 1s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 /* Dark overlay to make text readable */
@@ -339,12 +298,15 @@
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   /* Force full-width regardless of parents */
-  min-height: 400px; /* Reduced from 600px */
-  padding: 3rem 0; /* Reduced from 6rem */
+  min-height: 400px;
+  /* Reduced from 600px */
+  padding: 3rem 0;
+  /* Reduced from 6rem */
   text-align: left;
   background-size: cover;
-  background-position: center top;
+  background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   overflow: hidden;
 }
 
@@ -369,10 +331,10 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(to bottom,
-      rgba(26, 16, 12, 0.95) 0%,
-      rgba(26, 16, 12, 0.6) 30%,
-      rgba(26, 16, 12, 0.6) 70%,
-      rgba(26, 16, 12, 0.95) 100%);
+      rgba(26, 16, 12, 1) 0%,
+      rgba(26, 16, 12, 0.7) 30%,
+      rgba(26, 16, 12, 0.7) 70%,
+      rgba(26, 16, 12, 1) 100%);
   z-index: 1;
 }
 
@@ -458,7 +420,8 @@
 /* Features Section */
 .features-section {
   max-width: 1100px;
-  margin: 0 auto 1.5rem auto; /* Reduced from 3rem */
+  margin: 0 auto 1.5rem auto;
+  /* Reduced from 3rem */
 }
 
 .features-container {
@@ -511,16 +474,17 @@
 /* Menu Section */
 .menu-section {
   position: relative;
-  background-color: #0a0502;
-  background-size: cover;
-  background-position: center top;
+  background-color: #1A100C;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(211, 84, 0, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(211, 84, 0, 0.05) 0%, transparent 40%),
+    linear-gradient(rgba(10, 5, 2, 0.9), rgba(10, 5, 2, 0.95));
   padding: 1rem 0;
-  /* Reduced from 1.5rem */
   color: #EADAC2;
   overflow: hidden;
 }
 
-/* Background Dark Overlay for readability */
+/* Background Texture Pattern */
 .menu-section::before {
   content: '';
   position: absolute;
@@ -528,11 +492,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(to bottom,
-      rgba(10, 5, 2, 0.95) 0%,
-      rgba(10, 5, 2, 0.6) 20%,
-      rgba(10, 5, 2, 0.6) 80%,
-      rgba(10, 5, 2, 0.95) 100%);
+  background-image: 
+    linear-gradient(rgba(211, 84, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(211, 84, 0, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
   pointer-events: none;
   z-index: 1;
 }
@@ -656,12 +619,14 @@
 
 .scrollable-row {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid instead of fixed columns */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  /* Responsive grid instead of fixed columns */
   gap: 30px;
   padding: 1.5rem 0;
   justify-items: center;
   width: 100%;
-  overflow: visible; /* Ensure no scrollbars */
+  overflow: visible;
+  /* Ensure no scrollbars */
 }
 
 .menu-item-card {
@@ -768,7 +733,8 @@
 .proudly-local {
   background-color: #0a0502;
   color: #EADAC2;
-  padding: 3rem 0; /* Reduced from 6rem */
+  padding: 3rem 0;
+  /* Reduced from 6rem */
   position: relative;
   overflow: hidden;
 }
@@ -858,7 +824,8 @@
   margin: 0 auto;
 }
 
-.contact-header, .follow-header {
+.contact-header,
+.follow-header {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1009,7 +976,7 @@
     flex-direction: column;
     gap: 25px;
   }
-  
+
   .social-divider {
     display: none;
   }
@@ -1020,7 +987,7 @@
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  
+
   .contact-info-box {
     justify-content: center;
     text-align: center;

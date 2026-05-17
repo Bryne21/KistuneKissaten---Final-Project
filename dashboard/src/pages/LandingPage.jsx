@@ -138,7 +138,7 @@ function LandingPage() {
         </div>
       </section>
 
-      <section id="menu" className="section menu-section" style={{ backgroundImage: `url(${menuBg})` }}>
+      <section id="menu" className="section menu-section">
         <div className="menu-bg-decor">
 
         </div>
