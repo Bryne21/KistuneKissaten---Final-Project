@@ -584,7 +584,7 @@
 }
 
 .subcategory-section {
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
   padding: 0 1rem;
 }
 
@@ -593,7 +593,7 @@
   font-size: 0.9rem;
   letter-spacing: 4px;
   color: #BBAA99;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   text-align: center;
   display: flex;
   align-items: center;
@@ -620,10 +620,10 @@
 
 .scrollable-row {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   /* Responsive grid instead of fixed columns */
-  gap: 30px;
-  padding: 1.5rem 0;
+  gap: 15px;
+  padding: 1rem 0;
   justify-items: center;
   width: 100%;
   overflow: visible;
@@ -632,7 +632,7 @@
 
 .menu-item-card {
   width: 100%;
-  max-width: 250px;
+  max-width: 280px;
   background: linear-gradient(145deg, #231815, #1a100c);
   border: 1px solid rgba(211, 84, 0, 0.15);
   border-radius: 12px;
@@ -679,7 +679,7 @@
 
 .item-name {
   font-family: 'Playfair Display', serif;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 1px;
   color: #EADAC2;
@@ -688,7 +688,7 @@
 }
 
 .item-desc {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   color: #BBAA99;
   margin: 0;
   line-height: 1.4;
@@ -702,7 +702,7 @@
 
 .item-price {
   font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #D35400;
   margin: 0;
