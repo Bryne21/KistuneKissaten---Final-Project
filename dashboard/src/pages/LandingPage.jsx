@@ -8,6 +8,8 @@ import kitsuneIcon from '../Icons/kitsune.png';
 import toriiIcon from '../Icons/torii-gate.png';
 import menuBg from '../assets/menu_bg.png';
 import storyBg from '../assets/story_bg.png';
+import brunchBg from '../assets/brunch_bg.png';
+import drinksBg from '../assets/drinks_bg.png';
 import soupIcon from '../assets/soup.png';
 import communicationIcon from '../assets/communication.png';
 import clockIcon from '../assets/clock.png';
@@ -189,7 +191,7 @@ function LandingPage() {
         </div>
       </section>
 
-      <section id="menu-brunch" className="section menu-section" style={{ backgroundImage: `url(${secondMainImg})` }}>
+      <section id="menu-brunch" className="section menu-section" style={{ backgroundImage: `url(${brunchBg})` }}>
         <div className="menu-bg-decor"></div>
         <div className="menu-container">
           {/* BRUNCH SECTION */}
@@ -217,7 +219,7 @@ function LandingPage() {
         </div>
       </section>
 
-      <section id="menu-drinks" className="section menu-section" style={{ backgroundImage: `url(${storyBg})` }}>
+      <section id="menu-drinks" className="section menu-section" style={{ backgroundImage: `url(${drinksBg})` }}>
         <div className="menu-bg-decor"></div>
         <div className="menu-container">
           {/* DRINKS MENU SECTION */}
