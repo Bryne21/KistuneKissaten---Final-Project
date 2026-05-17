@@ -12,6 +12,8 @@ import brunchBg from '../assets/brunch_bg.png';
 import drinksBg from '../assets/drinks_bg.png';
 import lumabangImg from '../assets/lumabang.png';
 import soupIcon from '../assets/soup.png';
+import hotSoupIcon from '../assets/hot-soup-2.png';
+import coffeeIcon from '../assets/coffee.png';
 import communicationIcon from '../assets/communication.png';
 import clockIcon from '../assets/clock.png';
 import './LandingPage.css';
@@ -119,7 +121,7 @@ function LandingPage() {
       <section className="features-section">
         <div className="features-container">
           <div className="feature-box">
-            <div className="feature-icon-circle">🍲</div>
+            <div className="feature-icon-circle"><img src={hotSoupIcon} alt="Hot Soup" style={{ width: '40px', height: '40px', objectFit: 'contain' }} /></div>
             <h4>CRAFTED WITH PASSION</h4>
             <p>We pour our heart into every cup and every dish.</p>
           </div>
@@ -129,7 +131,7 @@ function LandingPage() {
             <p>Authentic flavors inspired by Japan's rich culinary heritage.</p>
           </div>
           <div className="feature-box">
-            <div className="feature-icon-circle">☕</div>
+            <div className="feature-icon-circle"><img src={coffeeIcon} alt="Coffee" style={{ width: '40px', height: '40px', objectFit: 'contain' }} /></div>
             <h4>QUALITY INGREDIENTS</h4>
             <p>We use carefully selected ingredients for the best taste.</p>
           </div>
