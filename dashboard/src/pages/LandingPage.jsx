@@ -10,6 +10,7 @@ import menuBg from '../assets/menu_bg.png';
 import storyBg from '../assets/story_bg.png';
 import brunchBg from '../assets/brunch_bg.png';
 import drinksBg from '../assets/drinks_bg.png';
+import lumabangImg from '../assets/lumabang.png';
 import soupIcon from '../assets/soup.png';
 import communicationIcon from '../assets/communication.png';
 import clockIcon from '../assets/clock.png';
@@ -273,7 +274,7 @@ function LandingPage() {
       <section id="location" className="section proudly-local">
         <div className="local-container">
           <div className="local-image">
-            <img src={heroImg} alt="Nueva Vizcaya" />
+            <img src={lumabangImg} alt="Lumabang, Nueva Vizcaya" />
           </div>
           <div className="local-content">
             <span className="local-subtitle">📍 PROUDLY LOCAL</span>
