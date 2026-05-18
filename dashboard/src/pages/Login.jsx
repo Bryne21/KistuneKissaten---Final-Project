@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import {
   Button,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Link,
   Grid,
   Box,
@@ -11,6 +9,7 @@ import {
   Container,
   CssBaseline,
 } from "@mui/material";
+import toriiIcon from '../Icons/torii-gate.png';
 import "./Login.css";
 
 function Login() {
@@ -104,10 +103,7 @@ function Login() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
 
             {error && (
               <Typography
@@ -129,9 +125,26 @@ function Login() {
             </Button>
           </Box>
         </div>
-        <Link href="/" className="back-link">
-          ← Back to Kitsune Kissaten
-        </Link>
+        <Button
+          href="/"
+          variant="outlined"
+          startIcon={<img src={toriiIcon} alt="Torii" style={{ width: '20px', height: '20px', objectFit: 'contain', opacity: 0.8 }} />}
+          sx={{
+            mt: 4,
+            borderColor: "rgba(211, 84, 0, 0.5)",
+            color: "#EADAC2",
+            textTransform: "none",
+            letterSpacing: "1px",
+            fontFamily: "Inter, sans-serif",
+            "&:hover": {
+              borderColor: "#D35400",
+              backgroundColor: "rgba(211, 84, 0, 0.1)",
+              color: "#D35400"
+            }
+          }}
+        >
+          Return to Kitsune Kissaten
+        </Button>
       </Container>
     </div>
   );

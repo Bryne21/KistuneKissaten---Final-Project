@@ -1,5 +1,5 @@
 /* AdminPanel.css */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
 
 :root {
   --burnt-orange: #D35400;
@@ -10,11 +10,15 @@
 }
 
 .admin-theme {
-  background-color: var(--cream);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   font-family: 'Inter', sans-serif;
+  background-image: linear-gradient(rgba(10, 5, 2, 0.8), rgba(10, 5, 2, 0.8)), url('../assets/local_bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #EADAC2;
 }
 
 /* Fix Navbar for Dashboard */
@@ -25,8 +29,18 @@
   margin-bottom: 2rem;
 }
 
-.admin-theme .logo-en {
-  color: var(--cream);
+.logo-img-text {
+  height: 160px;
+  width: auto;
+  margin: -55px 0;
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
+}
+
+.logo-img-text:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 8px rgba(211, 84, 0, 0.6));
 }
 
 .admin-theme .main-nav a {
@@ -86,8 +100,9 @@
 
 .tab-btn.active {
   color: #D35400;
-  background: white;
-  box-shadow: 0 -3px 10px rgba(0,0,0,0.05);
+  background: rgba(34, 24, 20, 0.6);
+  box-shadow: 0 -3px 15px rgba(211, 84, 0, 0.1);
+  backdrop-filter: blur(5px);
 }
 
 .tab-btn.active::after {
@@ -146,22 +161,24 @@
 }
 
 .AddMenuForm {
-  background: white;
-  padding: 1.5rem;
+  background: rgba(34, 24, 20, 0.4);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   border-top: 4px solid var(--burnt-orange);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  /* Removed fixed height to let content determine size naturally */
 }
 
 .AddMenuForm h1 {
-  font-family: 'Playfair Display', serif;
-  color: var(--text-dark);
-  font-size: 1.6rem; /* Slightly smaller */
-  margin-bottom: 1rem;
+  font-family: 'Outfit', sans-serif;
+  color: #EADAC2;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
 }
 
 .AddMenuForm .MuiTextField-root {
@@ -170,11 +187,14 @@
 }
 
 .Preview {
-  background: white;
+  background: rgba(34, 24, 20, 0.4);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-  height: 100%; /* Take full height of parent row */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -185,8 +205,8 @@
 }
 
 .Preview h1 {
-  font-family: 'Playfair Display', serif;
-  color: var(--text-dark);
+  font-family: 'Outfit', sans-serif;
+  color: #EADAC2;
   font-size: 2rem;
   margin-bottom: 2rem;
 }
@@ -199,47 +219,75 @@
 
 .MuiTableHead-root .MuiTableCell-root {
   font-weight: 700;
-  color: var(--text-dark);
-  border-bottom: 2px solid var(--cream);
+  color: #D35400 !important;
+  background-color: white !important;
+  border-bottom: none !important;
   text-transform: uppercase;
-  font-size: 0.75rem; /* Slightly smaller font */
-  letter-spacing: 1px;
-  padding: 1rem 0.5rem; /* Consistent padding */
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  padding: 1rem 1rem;
+}
+
+.MuiTableHead-root .MuiTableCell-root:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.MuiTableHead-root .MuiTableCell-root:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 .MuiTableBody-root .MuiTableRow-root {
-  background-color: #fafafa;
-  transition: transform 0.2s;
+  background-color: rgba(34, 24, 20, 0.6);
+  backdrop-filter: blur(5px);
+  transition: transform 0.2s, background-color 0.2s;
 }
 
 .MuiTableBody-root .MuiTableRow-root:hover {
-  transform: scale(1.01);
-  background-color: #fff;
+  transform: translateY(-2px);
+  background-color: rgba(211, 84, 0, 0.1);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 .MuiTableBody-root .MuiTableCell-root {
   border: none;
-  color: #555;
-  padding: 0.8rem 0.5rem; /* Reduced padding to fit columns */
+  color: #EADAC2 !important;
+  padding: 0.8rem 1rem;
 }
 
 .MuiTableBody-root .MuiTableCell-root:first-child {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
 }
 
 .MuiTableBody-root .MuiTableCell-root:last-child {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 
 /* Form Elements */
-.MuiTextField-root .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: var(--burnt-orange);
+.MuiInputBase-input,
+.MuiSelect-select {
+  color: #EADAC2 !important;
 }
 
-.MuiInputLabel-root.Mui-focused {
-  color: var(--burnt-orange);
+.MuiInputLabel-root {
+  color: #BBAA99 !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: rgba(211, 84, 0, 0.3) !important;
+}
+
+.MuiTextField-root .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline,
+.MuiFormControl-root .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(211, 84, 0, 0.6) !important;
+}
+
+.MuiTextField-root .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline,
+.MuiFormControl-root .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--burnt-orange) !important;
 }
 
 .btn-admin {

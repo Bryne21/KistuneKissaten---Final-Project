@@ -1,5 +1,5 @@
 /* Login.css */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
 
 :root {
   --burnt-orange: #D35400;
@@ -10,7 +10,6 @@
 }
 
 .login-background {
-  background-color: var(--dark-wood);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -20,30 +19,54 @@
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  background-image: linear-gradient(rgba(10, 5, 2, 0.6), rgba(10, 5, 2, 0.8)), url('../assets/local_bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .login-card {
-  background-color: var(--cream);
+  background: rgba(34, 24, 20, 0.4);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   padding: 3rem;
   border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
   width: 100%;
   max-width: 450px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-top: 6px solid var(--burnt-orange);
 }
 
 .login-title {
-  color: var(--text-dark);
+  color: #EADAC2;
   margin-bottom: 2rem !important;
   font-weight: 700 !important;
   text-align: center;
-  font-family: 'Playfair Display', serif !important;
+  font-family: 'Outfit', sans-serif !important;
   font-size: 2.5rem !important;
+  letter-spacing: 2px;
 }
 
 /* Material UI Overrides */
 .MuiTextField-root .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
   border-color: var(--burnt-orange) !important;
+}
+
+.MuiTextField-root .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(211, 84, 0, 0.6) !important;
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: rgba(211, 84, 0, 0.3) !important;
+}
+
+.MuiInputBase-input {
+  color: #EADAC2 !important;
+}
+
+.MuiInputLabel-root {
+  color: #BBAA99 !important;
 }
 
 .MuiInputLabel-root.Mui-focused {
@@ -60,7 +83,7 @@
   transition: background-color 0.3s ease !important;
   text-transform: uppercase !important;
   letter-spacing: 1px !important;
-  font-family: 'Inter', sans-serif !important;
+  font-family: 'Outfit', sans-serif !important;
 }
 
 .login-button:hover {

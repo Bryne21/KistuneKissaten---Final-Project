@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
 
 .landing-container {
   display: flex;
@@ -38,29 +38,18 @@
   object-fit: contain;
 }
 
-.logo-text {
-  display: flex;
-  flex-direction: column;
+.logo-img-text {
+  height: 160px;
+  width: auto;
+  margin: -55px 0;
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
 }
 
-.logo-jp {
-  font-size: 0.7rem;
-  color: #BBAA99;
-  letter-spacing: 1px;
-}
-
-.logo-en {
-  font-size: 1.2rem;
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  color: #EADAC2;
-  letter-spacing: 1px;
-}
-
-.logo-loc {
-  font-size: 0.65rem;
-  color: #BBAA99;
-  letter-spacing: 1px;
+.logo-img-text:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 8px rgba(211, 84, 0, 0.6));
 }
 
 .main-nav {
@@ -214,7 +203,7 @@
 }
 
 .hero-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 5rem;
   font-weight: 700;
   line-height: 1.1;
@@ -389,7 +378,7 @@
 }
 
 .our-story-section h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 3rem;
   color: #EADAC2;
   margin: 0 0 1.5rem 0;
@@ -575,7 +564,7 @@
 }
 
 .main-category-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 2.5rem;
   letter-spacing: 8px;
   color: #EADAC2;
@@ -707,7 +696,7 @@
 }
 
 .item-name {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 1px;
@@ -759,12 +748,13 @@
   }
 }
 
-/* Proudly Local Section */
 .proudly-local {
-  background-color: #0a0502;
+  background-image: linear-gradient(to bottom, rgba(26, 16, 12, 1) 0%, rgba(26, 16, 12, 0.6) 30%, rgba(26, 16, 12, 0.6) 70%, rgba(26, 16, 12, 1) 100%), url('../assets/local_bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: #EADAC2;
-  padding: 3rem 0;
-  /* Reduced from 6rem */
+  padding: 6rem 0;
   position: relative;
   overflow: hidden;
 }
@@ -810,7 +800,7 @@
 }
 
 .local-content h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 3rem;
   margin: 0 0 1.5rem 0;
   line-height: 1.1;
@@ -835,11 +825,23 @@
 }
 
 .torii-illustration {
-  font-size: 6rem;
-  color: rgba(211, 84, 0, 0.1);
   position: absolute;
-  right: 2rem;
-  bottom: 0;
+  right: 4rem;
+  bottom: 10px;
+  z-index: 1;
+}
+
+.torii-illustration img {
+  height: 180px;
+  width: auto;
+  opacity: 0.95;
+  filter: brightness(1.2) contrast(1.1) drop-shadow(0 0 25px rgba(211, 84, 0, 0.7));
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.torii-illustration img:hover {
+  transform: scale(1.1) rotate(3deg);
+  filter: brightness(1.35) contrast(1.15) drop-shadow(0 0 35px rgba(211, 84, 0, 0.95));
 }
 
 .contact-section {
@@ -882,7 +884,7 @@
 }
 
 .contact-header h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 2.2rem;
   letter-spacing: 6px;
   color: #EADAC2;
@@ -1110,4 +1112,45 @@
   .footer-links-list {
     align-items: center;
   }
+}
+
+/* Scroll to Top Button */
+.scroll-to-top {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(26, 16, 12, 0.85);
+  border: 1px solid rgba(211, 84, 0, 0.4);
+  color: #EADAC2;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1001;
+  outline: none;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+  background: rgba(211, 84, 0, 0.9);
+  color: #FAF3E0;
+  border-color: #FAF3E0;
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 0 20px rgba(211, 84, 0, 0.6);
 }

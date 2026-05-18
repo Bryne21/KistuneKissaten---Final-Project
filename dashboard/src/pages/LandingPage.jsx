@@ -4,6 +4,7 @@ import axios from 'axios';
 import heroImg from '../assets/enchangeMainImage.png';
 import secondMainImg from '../assets/2ndImageFinal.png';
 import logoImg from '../assets/kistunelogo.png';
+import logoKitsune from '../assets/logoKitsune.png';
 import kitsuneIcon from '../Icons/kitsune.png';
 import toriiIcon from '../Icons/torii-gate.png';
 import menuBg from '../assets/menu_bg.png';
@@ -20,6 +21,8 @@ import './LandingPage.css';
 
 function LandingPage() {
   const [menuItems, setMenuItems] = useState([]);
+  const [showScroll, setShowScroll] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const isAuthenticated = !!localStorage.getItem("token");
 
   const handleSignOut = () => {
@@ -31,19 +34,29 @@ function LandingPage() {
   useEffect(() => {
     axios.get("http://localhost:1337/menu")
       .then((res) => setMenuItems(res.data))
-      .catch((err) => console.error("Error fetching menu:", err));
-  }, []);
+      .catch((err) => console.error("Error fetching menu:", err))
+      .finally(() => setIsLoading(false));
+
+    const checkScrollTop = () => {
+      if (!showScroll && window.pageYOffset > 400) {
+        setShowScroll(true);
+      } else if (showScroll && window.pageYOffset <= 400) {
+        setShowScroll(false);
+      }
+    };
+    window.addEventListener('scroll', checkScrollTop);
+    return () => window.removeEventListener('scroll', checkScrollTop);
+  }, [showScroll]);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="landing-container">
       <header className="navbar">
-        <div className="logo-container">
-          <img src={logoImg} alt="Fox Logo" className="nav-logo" />
-          <div className="logo-text">
-            <span className="logo-jp">キツネ喫茶店</span>
-            <span className="logo-en">KITSUNE KISSATEN</span>
-            <span className="logo-loc">SOLANO, NUEVA VIZCAYA</span>
-          </div>
+        <div className="logo-container" onClick={scrollToTop}>
+          <img src={logoKitsune} alt="Kitsune Kissaten" className="logo-img-text" />
         </div>
         <nav className="main-nav">
           <a href="#home">HOME</a>
@@ -157,18 +170,31 @@ function LandingPage() {
             <div className="subcategory-section">
               <h3 className="subcategory-title">CROISSANT</h3>
               <div className="items-row scrollable-row">
-                {menuItems.filter(item => item.subcategory === "CROISSANT").map((item, idx) => (
-                  <div key={idx} className="menu-item-card">
-                    <div className="item-img-container">
-                      <img src={item.photo} alt={item.name} />
+                {isLoading ? (
+                  [1, 2, 3, 4].map((skeleton) => (
+                    <div key={skeleton} className="menu-item-card skeleton-card">
+                      <div className="skeleton-img"></div>
+                      <div className="item-info">
+                        <div className="skeleton-text title"></div>
+                        <div className="skeleton-text desc"></div>
+                        <div className="skeleton-text price"></div>
+                      </div>
                     </div>
-                    <div className="item-info">
-                      <p className="item-name">{item.name.toUpperCase()}</p>
-                      <p className="item-desc">{item.description}</p>
-                      <p className="item-price">₱{item.price}</p>
+                  ))
+                ) : (
+                  menuItems.filter(item => item.subcategory === "CROISSANT").map((item, idx) => (
+                    <div key={idx} className="menu-item-card">
+                      <div className="item-img-container">
+                        <img src={item.photo} alt={item.name} />
+                      </div>
+                      <div className="item-info">
+                        <p className="item-name">{item.name.toUpperCase()}</p>
+                        <p className="item-desc">{item.description}</p>
+                        <p className="item-price">₱{item.price}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             </div>
 
@@ -176,18 +202,31 @@ function LandingPage() {
             <div className="subcategory-section">
               <h3 className="subcategory-title">PASTA</h3>
               <div className="items-row scrollable-row">
-                {menuItems.filter(item => item.subcategory === "PASTA").map((item, idx) => (
-                  <div key={idx} className="menu-item-card">
-                    <div className="item-img-container">
-                      <img src={item.photo} alt={item.name} />
+                {isLoading ? (
+                  [1, 2, 3, 4].map((skeleton) => (
+                    <div key={skeleton} className="menu-item-card skeleton-card">
+                      <div className="skeleton-img"></div>
+                      <div className="item-info">
+                        <div className="skeleton-text title"></div>
+                        <div className="skeleton-text desc"></div>
+                        <div className="skeleton-text price"></div>
+                      </div>
                     </div>
-                    <div className="item-info">
-                      <p className="item-name">{item.name.toUpperCase()}</p>
-                      <p className="item-desc">{item.description}</p>
-                      <p className="item-price">₱{item.price}</p>
+                  ))
+                ) : (
+                  menuItems.filter(item => item.subcategory === "PASTA").map((item, idx) => (
+                    <div key={idx} className="menu-item-card">
+                      <div className="item-img-container">
+                        <img src={item.photo} alt={item.name} />
+                      </div>
+                      <div className="item-info">
+                        <p className="item-name">{item.name.toUpperCase()}</p>
+                        <p className="item-desc">{item.description}</p>
+                        <p className="item-price">₱{item.price}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             </div>
           </div>
@@ -205,18 +244,31 @@ function LandingPage() {
             { /*<div className="category-icon-main"><img src={kitsuneIcon} alt="Kitsune" /></div>*/}
 
             <div className="items-row scrollable-row">
-              {menuItems.filter(item => item.category === "BRUNCH").map((item, idx) => (
-                <div key={idx} className="menu-item-card">
-                  <div className="item-img-container">
-                    <img src={item.photo} alt={item.name} />
+              {isLoading ? (
+                [1, 2, 3, 4].map((skeleton) => (
+                  <div key={skeleton} className="menu-item-card skeleton-card">
+                    <div className="skeleton-img"></div>
+                    <div className="item-info">
+                      <div className="skeleton-text title"></div>
+                      <div className="skeleton-text desc"></div>
+                      <div className="skeleton-text price"></div>
+                    </div>
                   </div>
-                  <div className="item-info">
-                    <p className="item-name">{item.name.toUpperCase()}</p>
-                    <p className="item-desc">{item.description}</p>
-                    <p className="item-price">₱{item.price}</p>
+                ))
+              ) : (
+                menuItems.filter(item => item.category === "BRUNCH").map((item, idx) => (
+                  <div key={idx} className="menu-item-card">
+                    <div className="item-img-container">
+                      <img src={item.photo} alt={item.name} />
+                    </div>
+                    <div className="item-info">
+                      <p className="item-name">{item.name.toUpperCase()}</p>
+                      <p className="item-desc">{item.description}</p>
+                      <p className="item-price">₱{item.price}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
         </div>
@@ -236,18 +288,31 @@ function LandingPage() {
             <div className="subcategory-section drinks-section">
               <h3 className="subcategory-title">KŌHI (COFFEE)</h3>
               <div className="items-row scrollable-row">
-                {menuItems.filter(item => item.subcategory === "KOHI (COFFEE)").map((item, idx) => (
-                  <div key={idx} className="menu-item-card">
-                    <div className="item-img-container">
-                      <img src={item.photo} alt={item.name} />
+                {isLoading ? (
+                  [1, 2, 3, 4].map((skeleton) => (
+                    <div key={skeleton} className="menu-item-card skeleton-card">
+                      <div className="skeleton-img"></div>
+                      <div className="item-info">
+                        <div className="skeleton-text title"></div>
+                        <div className="skeleton-text desc"></div>
+                        <div className="skeleton-text price"></div>
+                      </div>
                     </div>
-                    <div className="item-info">
-                      <p className="item-name">{item.name.toUpperCase()}</p>
-                      <p className="item-desc">{item.description}</p>
-                      <p className="item-price">₱{item.price}</p>
+                  ))
+                ) : (
+                  menuItems.filter(item => item.subcategory === "KOHI (COFFEE)").map((item, idx) => (
+                    <div key={idx} className="menu-item-card">
+                      <div className="item-img-container">
+                        <img src={item.photo} alt={item.name} />
+                      </div>
+                      <div className="item-info">
+                        <p className="item-name">{item.name.toUpperCase()}</p>
+                        <p className="item-desc">{item.description}</p>
+                        <p className="item-price">₱{item.price}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             </div>
 
@@ -255,18 +320,31 @@ function LandingPage() {
             <div className="subcategory-section drinks-section">
               <h3 className="subcategory-title">MATCHA</h3>
               <div className="items-row scrollable-row">
-                {menuItems.filter(item => item.subcategory === "MATCHA").map((item, idx) => (
-                  <div key={idx} className="menu-item-card">
-                    <div className="item-img-container">
-                      <img src={item.photo} alt={item.name} />
+                {isLoading ? (
+                  [1, 2, 3, 4].map((skeleton) => (
+                    <div key={skeleton} className="menu-item-card skeleton-card">
+                      <div className="skeleton-img"></div>
+                      <div className="item-info">
+                        <div className="skeleton-text title"></div>
+                        <div className="skeleton-text desc"></div>
+                        <div className="skeleton-text price"></div>
+                      </div>
                     </div>
-                    <div className="item-info">
-                      <p className="item-name">{item.name.toUpperCase()}</p>
-                      <p className="item-desc">{item.description}</p>
-                      <p className="item-price">₱{item.price}</p>
+                  ))
+                ) : (
+                  menuItems.filter(item => item.subcategory === "MATCHA").map((item, idx) => (
+                    <div key={idx} className="menu-item-card">
+                      <div className="item-img-container">
+                        <img src={item.photo} alt={item.name} />
+                      </div>
+                      <div className="item-info">
+                        <p className="item-name">{item.name.toUpperCase()}</p>
+                        <p className="item-desc">{item.description}</p>
+                        <p className="item-price">₱{item.price}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             </div>
           </div>
@@ -286,7 +364,7 @@ function LandingPage() {
               warm hospitality, and the simple joys of<br />
               good food and coffee.</p>
           </div>
-          <div className="torii-illustration"><img src={toriiIcon} alt="Torii Gate" style={{ height: '120px', width: 'auto', opacity: 0.2 }} /></div>
+          <div className="torii-illustration"><img src={toriiIcon} alt="Torii Gate" /></div>
         </div>
       </section>
 
@@ -355,6 +433,15 @@ function LandingPage() {
           <p>&copy; {new Date().getFullYear()} Kitsune Kissaten. All Rights Reserved.</p>
         </div>
       </footer>
+
+      {/* Scroll to Top Button */}
+      <button
+        className={`scroll-to-top ${showScroll ? 'visible' : ''}`}
+        onClick={scrollToTop}
+        aria-label="Scroll to top"
+      >
+        ↑
+      </button>
     </div>
   );
 }

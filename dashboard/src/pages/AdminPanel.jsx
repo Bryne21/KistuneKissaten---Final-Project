@@ -7,6 +7,7 @@ import './AdminPanel.css';
 import axios from "axios";
 import { Link } from 'react-router-dom';
 import logoImg from '../assets/kistunelogo.png';
+import logoKitsune from '../assets/logoKitsune.png';
 
 function AdminPanel() {
     // Navigation State
@@ -256,12 +257,7 @@ function AdminPanel() {
         <div className="admin-theme">
             <header className="navbar">
                 <div className="logo-container">
-                    <img src={logoImg} alt="Fox Logo" className="nav-logo" />
-                    <div className="logo-text">
-                        <span className="logo-jp">キツネ喫茶店</span>
-                        <span className="logo-en">KITSUNE KISSATEN</span>
-                        <span className="logo-loc">SOLANO, NUEVA VIZCAYA</span>
-                    </div>
+                    <img src={logoKitsune} alt="Kitsune Kissaten" className="logo-img-text" />
                 </div>
                 <nav className="main-nav">
                     <Link to="/#home">HOME</Link>
@@ -299,7 +295,7 @@ function AdminPanel() {
                 {activeTab === 'menu' && (
                     <div className="tab-content">
                         <div className="section-title">
-                            <Typography variant="h4" sx={{ fontFamily: 'Playfair Display', color: '#1A100C', fontWeight: 700 }}>
+                            <Typography variant="h4" sx={{ fontFamily: 'Outfit', color: '#EADAC2', fontWeight: 700 }}>
                                 Menu Management
                             </Typography>
                         </div>
@@ -375,7 +371,7 @@ function AdminPanel() {
                     <div className="tab-content">
                         {/* USER SECTION */}
                         <div className="section-title">
-                            <Typography variant="h4" sx={{ fontFamily: 'Playfair Display', color: '#1A100C', fontWeight: 700 }}>
+                            <Typography variant="h4" sx={{ fontFamily: 'Outfit', color: '#EADAC2', fontWeight: 700 }}>
                                 Staff Management
                             </Typography>
                         </div>
