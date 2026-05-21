@@ -66,7 +66,7 @@ function LandingPage() {
 
           {isAuthenticated ? (
             <>
-              <Link to="/students">ADMIN</Link>
+              <Link to="/admin">ADMIN</Link>
               <button
                 onClick={handleSignOut}
                 style={{

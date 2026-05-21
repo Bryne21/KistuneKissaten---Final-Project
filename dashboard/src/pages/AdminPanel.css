@@ -120,14 +120,22 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .section-title {
   border-bottom: 2px solid var(--burnt-orange);
   padding-bottom: 0.5rem;
-  margin-bottom: 1rem; /* Fixed from negative margin */
+  margin-bottom: 1rem;
+  /* Fixed from negative margin */
 }
 
 .management-row {
@@ -136,11 +144,13 @@
   width: 100%;
   margin-bottom: 3rem;
   align-items: stretch;
-  height: 750px; /* Slightly increased to fit all fields comfortably */
+  height: 750px;
+  /* Slightly increased to fit all fields comfortably */
 }
 
 .management-row.staff-row {
-  height: 380px; /* Shorter height for staff section */
+  height: 380px;
+  /* Shorter height for staff section */
 }
 
 .form-container {
@@ -200,8 +210,10 @@
 }
 
 .Preview .MuiTableContainer-root {
-  flex: 1; /* Grow to fill the card height */
-  overflow-y: auto; /* Enable vertical scroll */
+  flex: 1;
+  /* Grow to fill the card height */
+  overflow-y: auto;
+  /* Enable vertical scroll */
 }
 
 .Preview h1 {
@@ -247,7 +259,7 @@
 .MuiTableBody-root .MuiTableRow-root:hover {
   transform: translateY(-2px);
   background-color: rgba(211, 84, 0, 0.1);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .MuiTableBody-root .MuiTableCell-root {
@@ -301,7 +313,7 @@
 }
 
 .btn-admin-secondary {
-  background-color: var(--dark-wood) !important;
+  background-color: var(--burnt-orange) !important;
   color: white !important;
   padding: 0.8rem 2rem !important;
   font-weight: 600 !important;
@@ -325,12 +337,13 @@
     flex-direction: column;
     padding: 0 2rem 2rem 2rem;
   }
-  
-  .Preview, .AddMenuForm {
+
+  .Preview,
+  .AddMenuForm {
     width: 100%;
     min-width: 0;
   }
-  
+
   .admin-theme .navbar {
     padding: 1rem 2rem;
   }

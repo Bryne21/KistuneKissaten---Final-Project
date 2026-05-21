@@ -58,7 +58,7 @@ function Login() {
         }),
       );
 
-      window.location.href = "/students";
+      window.location.href = "/admin";
     } catch (err) {
       console.error("Login Error:", err);
       setError(

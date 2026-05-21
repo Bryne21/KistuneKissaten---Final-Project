@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Home from "./pages/LandingPage";
-import Students from "./pages/AdminPanel";
+import Admin from "./pages/AdminPanel";
 import Users from "./pages/AdminPanel";
 import Login from "./pages/Login";
 
@@ -24,8 +24,8 @@ function App() {
           element={<Home />}
         />
         <Route
-          path="/students"
-          element={isAuthenticated ? <Students /> : <Navigate to="/login" />}
+          path="/admin"
+          element={isAuthenticated ? <Admin /> : <Navigate to="/login" />}
         />
         <Route
           path="/add-user"

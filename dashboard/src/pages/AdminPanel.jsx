@@ -266,7 +266,7 @@ function AdminPanel() {
                     <Link to="/#contact">CONTACT</Link>
                     {isAuthenticated ? (
                         <>
-                            <Link to="/students" className="active">ADMIN</Link>
+                            <Link to="/admin" className="active">ADMIN</Link>
                             <button onClick={handleSignOut} className="signout-btn">SIGN OUT</button>
                         </>
                     ) : (
