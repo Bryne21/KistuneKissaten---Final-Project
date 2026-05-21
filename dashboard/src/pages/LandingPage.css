@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 .landing-container {
   display: flex;
@@ -210,7 +210,7 @@
 }
 
 .hero-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Playfair Display', serif;
   font-size: 5rem;
   font-weight: 700;
   line-height: 1.1;
@@ -385,7 +385,7 @@
 }
 
 .our-story-section h2 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Playfair Display', serif;
   font-size: 3rem;
   color: #EADAC2;
   margin: 0 0 1.5rem 0;
@@ -541,7 +541,7 @@
   font-size: 20rem;
   font-weight: 900;
   color: rgba(211, 84, 0, 0.05);
-  font-family: serif;
+  font-family: 'Playfair Display', serif;
   user-select: none;
 }
 
@@ -571,7 +571,7 @@
 }
 
 .main-category-title {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Playfair Display', serif;
   font-size: 2.5rem;
   letter-spacing: 8px;
   color: #EADAC2;
@@ -584,7 +584,7 @@
 }
 
 .jp-accent {
-  font-family: serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.8rem;
   color: #D35400;
   opacity: 0.8;
@@ -703,7 +703,7 @@
 }
 
 .item-name {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 1px;
@@ -823,7 +823,7 @@
 }
 
 .local-content h2 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Playfair Display', serif;
   font-size: 3rem;
   margin: 0 0 1.5rem 0;
   line-height: 1.1;
@@ -907,7 +907,7 @@
 }
 
 .contact-header h2 {
-  font-family: 'Outfit', sans-serif;
+  font-family: 'Playfair Display', serif;
   font-size: 2.2rem;
   letter-spacing: 6px;
   color: #EADAC2;

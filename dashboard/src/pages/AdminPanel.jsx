@@ -295,7 +295,7 @@ function AdminPanel() {
                 {activeTab === 'menu' && (
                     <div className="tab-content">
                         <div className="section-title">
-                            <Typography variant="h4" sx={{ fontFamily: 'Outfit', color: '#EADAC2', fontWeight: 700 }}>
+                            <Typography variant="h4" sx={{ fontFamily: "'Playfair Display', serif", color: '#EADAC2', fontWeight: 700 }}>
                                 Menu Management
                             </Typography>
                         </div>
@@ -371,7 +371,7 @@ function AdminPanel() {
                     <div className="tab-content">
                         {/* USER SECTION */}
                         <div className="section-title">
-                            <Typography variant="h4" sx={{ fontFamily: 'Outfit', color: '#EADAC2', fontWeight: 700 }}>
+                            <Typography variant="h4" sx={{ fontFamily: "'Playfair Display', serif", color: '#EADAC2', fontWeight: 700 }}>
                                 Staff Management
                             </Typography>
                         </div>

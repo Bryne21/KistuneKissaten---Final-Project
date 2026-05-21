@@ -1,5 +1,5 @@
 /* Login.css */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 :root {
   --burnt-orange: #D35400;
@@ -43,7 +43,7 @@
   margin-bottom: 2rem !important;
   font-weight: 700 !important;
   text-align: center;
-  font-family: 'Outfit', sans-serif !important;
+  font-family: 'Playfair Display', serif !important;
   font-size: 2.5rem !important;
   letter-spacing: 2px;
 }
@@ -83,7 +83,7 @@
   transition: background-color 0.3s ease !important;
   text-transform: uppercase !important;
   letter-spacing: 1px !important;
-  font-family: 'Outfit', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
 }
 
 .login-button:hover {
