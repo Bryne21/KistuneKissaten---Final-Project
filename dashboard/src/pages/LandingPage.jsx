@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Box, Container, Typography, Button, IconButton, Skeleton } from '@mui/material';
 import heroImg from '../assets/enchangeMainImage.png';
 import secondMainImg from '../assets/2ndImageFinal.png';
 import logoImg from '../assets/kistunelogo.png';
@@ -53,23 +54,24 @@ function LandingPage() {
   };
 
   return (
-    <div className="landing-container">
-      <header className="navbar">
-        <div className="logo-container" onClick={scrollToTop}>
-          <img src={logoKitsune} alt="Kitsune Kissaten" className="logo-img-text" />
-        </div>
-        <nav className="main-nav">
-          <a href="#home">HOME</a>
-          <a href="#menu-food">MENU</a>
-          <a href="#about">ABOUT US</a>
-          <a href="#contact">CONTACT</a>
+    <Box className="landing-container">
+      <Box component="header" className="navbar">
+        <Box className="logo-container" onClick={scrollToTop} sx={{ cursor: 'pointer' }}>
+          <Box component="img" src={logoKitsune} alt="Kitsune Kissaten" className="logo-img-text" />
+        </Box>
+        <Box component="nav" className="main-nav">
+          <Box component="a" href="#home">HOME</Box>
+          <Box component="a" href="#menu-food">MENU</Box>
+          <Box component="a" href="#about">ABOUT US</Box>
+          <Box component="a" href="#contact">CONTACT</Box>
 
           {isAuthenticated ? (
             <>
-              <Link to="/admin">ADMIN</Link>
-              <button
+              <Box component={Link} to="/admin">ADMIN</Box>
+              <Box
+                component="button"
                 onClick={handleSignOut}
-                style={{
+                sx={{
                   background: 'none',
                   border: 'none',
                   color: 'inherit',
@@ -80,369 +82,422 @@ function LandingPage() {
                 }}
               >
                 SIGN OUT
-              </button>
+              </Box>
             </>
           ) : (
-            <Link to="/login">LOGIN</Link>
+            <Box component={Link} to="/login">LOGIN</Box>
           )}
-        </nav>
-      </header>
+        </Box>
+      </Box>
 
-      <section id="home" className="hero" style={{ backgroundImage: `url(${secondMainImg})` }}>
-
-
-        <div className="hero-content">
-          <p className="hero-jp">ようこそ、キツネ喫茶店へ</p>
-          <h1 className="hero-title">
+      <Box component="section" id="home" className="hero" sx={{ backgroundImage: `url(${secondMainImg})` }}>
+        <Box className="hero-content">
+          <Typography component="p" className="hero-jp">ようこそ、キツネ喫茶店へ</Typography>
+          <Typography component="h1" variant="h1" className="hero-title">
             JAPANESE SOUL,<br />
-            <span className="highlight">LOCAL HEART.</span>
-          </h1>
-          <p className="hero-desc">
+            <Box component="span" className="highlight">LOCAL HEART.</Box>
+          </Typography>
+          <Typography component="p" className="hero-desc">
             A Japanese-inspired café serving comforting dishes<br />
             and thoughtfully crafted coffee.
-          </p>
-          <div className="hero-buttons">
-            <a href="#menu-food" className="btn-primary">EXPLORE OUR MENU <img src={kitsuneIcon} alt="Kitsune" className="btn-icon" style={{ width: '20px', height: '20px', objectFit: 'contain' }} /></a>
-            <a href="#about" className="btn-secondary">OUR STORY <span className="btn-icon">➔</span></a>
-          </div>
-        </div>
-      </section>
+          </Typography>
+          <Box className="hero-buttons">
+            <Box
+              component="a"
+              href="#menu-food"
+              className="btn-primary"
+            >
+              EXPLORE OUR MENU 
+              <Box component="img" src={kitsuneIcon} alt="Kitsune" className="btn-icon" sx={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+            </Box>
+            <Box
+              component="a"
+              href="#about"
+              className="btn-secondary"
+            >
+              OUR STORY <Box component="span" className="btn-icon">➔</Box>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
 
-      <section id="about" className="section our-story-section" style={{ backgroundImage: `url(${storyBg})` }}>
-        <div className="story-content-wrapper">
-          <div className="story-content">
-            <span className="story-subtitle"><span className="torii-icon"><img src={toriiIcon} alt="Torii Gate" style={{ height: '20px', width: 'auto', verticalAlign: 'middle' }} /></span> OUR STORY</span>
-            <h2>Inspired by Tradition,<br />Created with <span className="highlight">Heart.</span></h2>
-            <p>
+      <Box component="section" id="about" className="section our-story-section" sx={{ backgroundImage: `url(${storyBg})` }}>
+        <Box className="story-content-wrapper">
+          <Box className="story-content">
+            <Typography component="span" className="story-subtitle">
+              <Box component="span" className="torii-icon">
+                <Box component="img" src={toriiIcon} alt="Torii Gate" sx={{ height: '20px', width: 'auto', verticalAlign: 'middle' }} />
+              </Box> 
+              OUR STORY
+            </Typography>
+            <Typography component="h2" variant="h2">Inspired by Tradition,<br />Created with <Box component="span" className="highlight">Heart.</Box></Typography>
+            <Typography component="p">
               Kistune Kissaten is more than just a café—<br />
               it is a space where Japanese kissaten culture<br />
               meets the warmth of home.
-            </p>
-            <p>
+            </Typography>
+            <Typography component="p">
               From our carefully brewed coffee to our<br />
               comforting dishes, every detail is crafted to<br />
               bring you a moment of calm, connection,<br />
               and unforgettable flavors.
-            </p>
-          </div>
-          <div className="story-image-container">
-            <img src={heroImg} alt="Kitsune Kissaten" className="story-img" />
-          </div>
-        </div>
-      </section>
+            </Typography>
+          </Box>
+          <Box className="story-image-container">
+            <Box component="img" src={heroImg} alt="Kitsune Kissaten" className="story-img" />
+          </Box>
+        </Box>
+      </Box>
 
-      <section className="features-section">
-        <div className="features-container">
-          <div className="feature-box">
-            <div className="feature-icon-circle"><img src={hotSoupIcon} alt="Hot Soup" style={{ width: '40px', height: '40px', objectFit: 'contain' }} /></div>
-            <h4>CRAFTED WITH PASSION</h4>
-            <p>We pour our heart into every cup and every dish.</p>
-          </div>
-          <div className="feature-box">
-            <div className="feature-icon-circle"><img src={soupIcon} alt="Soup" style={{ width: '40px', height: '40px', objectFit: 'contain' }} /></div>
-            <h4>JAPANESE-INSPIRED</h4>
-            <p>Authentic flavors inspired by Japan's rich culinary heritage.</p>
-          </div>
-          <div className="feature-box">
-            <div className="feature-icon-circle"><img src={coffeeIcon} alt="Coffee" style={{ width: '40px', height: '40px', objectFit: 'contain' }} /></div>
-            <h4>QUALITY INGREDIENTS</h4>
-            <p>We use carefully selected ingredients for the best taste.</p>
-          </div>
-          <div className="feature-box">
-            <div className="feature-icon-circle"><img src={kitsuneIcon} alt="Kitsune" style={{ width: '35px', height: '35px', objectFit: 'contain' }} /></div>
-            <h4>A COZY ESCAPE</h4>
-            <p>A welcoming place where you can relax and be yourself.</p>
-          </div>
-        </div>
-      </section>
+      <Box component="section" className="features-section">
+        <Box className="features-container">
+          <Box className="feature-box">
+            <Box className="feature-icon-circle">
+              <Box component="img" src={hotSoupIcon} alt="Hot Soup" sx={{ width: '40px', height: '40px', objectFit: 'contain' }} />
+            </Box>
+            <Typography component="h4" variant="h4">CRAFTED WITH PASSION</Typography>
+            <Typography component="p">We pour our heart into every cup and every dish.</Typography>
+          </Box>
+          <Box className="feature-box">
+            <Box className="feature-icon-circle">
+              <Box component="img" src={soupIcon} alt="Soup" sx={{ width: '40px', height: '40px', objectFit: 'contain' }} />
+            </Box>
+            <Typography component="h4" variant="h4">JAPANESE-INSPIRED</Typography>
+            <Typography component="p">Authentic flavors inspired by Japan's rich culinary heritage.</Typography>
+          </Box>
+          <Box className="feature-box">
+            <Box className="feature-icon-circle">
+              <Box component="img" src={coffeeIcon} alt="Coffee" sx={{ width: '40px', height: '40px', objectFit: 'contain' }} />
+            </Box>
+            <Typography component="h4" variant="h4">QUALITY INGREDIENTS</Typography>
+            <Typography component="p">We use carefully selected ingredients for the best taste.</Typography>
+          </Box>
+          <Box className="feature-box">
+            <Box className="feature-icon-circle">
+              <Box component="img" src={kitsuneIcon} alt="Kitsune" sx={{ width: '35px', height: '35px', objectFit: 'contain' }} />
+            </Box>
+            <Typography component="h4" variant="h4">A COZY ESCAPE</Typography>
+            <Typography component="p">A welcoming place where you can relax and be yourself.</Typography>
+          </Box>
+        </Box>
+      </Box>
 
-      <section id="menu-food" className="section menu-section" style={{ backgroundImage: `url(${menuBg})` }}>
-        <div className="menu-bg-decor"></div>
-        <div className="menu-container">
+      <Box component="section" id="menu-food" className="section menu-section" sx={{ backgroundImage: `url(${menuBg})` }}>
+        <Box className="menu-bg-decor" />
+        <Box className="menu-container">
           {/* FOOD MENU SECTION */}
-          <div className="menu-category-group">
-            <h2 className="main-category-title">
-              <span className="title-line"></span> <span className="jp-accent">食</span> FOOD MENU <span className="title-line"></span>
-            </h2>
-            { /*<div className="category-icon-main"><img src={kitsuneIcon} alt="Kitsune" /></div>*/}
+          <Box className="menu-category-group">
+            <Typography component="h2" variant="h2" className="main-category-title">
+              <Box component="span" className="title-line" /> 
+              <Box component="span" className="jp-accent">食</Box> FOOD MENU 
+              <Box component="span" className="title-line" />
+            </Typography>
 
             {/* CROISSANT */}
-            <div className="subcategory-section">
-              <h3 className="subcategory-title">CROISSANT</h3>
-              <div className="items-row scrollable-row">
+            <Box className="subcategory-section">
+              <Typography component="h3" variant="h3" className="subcategory-title">CROISSANT</Typography>
+              <Box className="items-row scrollable-row">
                 {isLoading ? (
                   [1, 2, 3, 4].map((skeleton) => (
-                    <div key={skeleton} className="menu-item-card skeleton-card">
-                      <div className="skeleton-img"></div>
-                      <div className="item-info">
-                        <div className="skeleton-text title"></div>
-                        <div className="skeleton-text desc"></div>
-                        <div className="skeleton-text price"></div>
-                      </div>
-                    </div>
+                    <Box key={skeleton} className="menu-item-card skeleton-card">
+                      <Skeleton variant="rectangular" height={280} className="skeleton-img" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)' }} />
+                      <Box className="item-info">
+                        <Skeleton variant="text" width="60%" height={24} className="skeleton-text title" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)', mx: 'auto' }} />
+                        <Skeleton variant="text" width="80%" height={16} className="skeleton-text desc" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)', mx: 'auto', mt: 1 }} />
+                        <Skeleton variant="text" width="40%" height={20} className="skeleton-text price" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)', mx: 'auto', mt: 1 }} />
+                      </Box>
+                    </Box>
                   ))
                 ) : (
                   menuItems.filter(item => item.subcategory === "CROISSANT").map((item, idx) => (
-                    <div key={idx} className="menu-item-card">
-                      <div className="item-img-container">
-                        <img src={item.photo} alt={item.name} />
-                      </div>
-                      <div className="item-info">
-                        <p className="item-name">{item.name.toUpperCase()}</p>
-                        <p className="item-desc">{item.description}</p>
-                        <p className="item-price">₱{item.price}</p>
-                      </div>
-                    </div>
+                    <Box key={idx} className="menu-item-card">
+                      <Box className="item-img-container">
+                        <Box component="img" src={item.photo} alt={item.name} />
+                      </Box>
+                      <Box className="item-info">
+                        <Typography component="p" className="item-name">{item.name.toUpperCase()}</Typography>
+                        <Typography component="p" className="item-desc">{item.description}</Typography>
+                        <Typography component="p" className="item-price">₱{item.price}</Typography>
+                      </Box>
+                    </Box>
                   ))
                 )}
-              </div>
-            </div>
+              </Box>
+            </Box>
 
             {/* PASTA */}
-            <div className="subcategory-section">
-              <h3 className="subcategory-title">PASTA</h3>
-              <div className="items-row scrollable-row">
+            <Box className="subcategory-section">
+              <Typography component="h3" variant="h3" className="subcategory-title">PASTA</Typography>
+              <Box className="items-row scrollable-row">
                 {isLoading ? (
                   [1, 2, 3, 4].map((skeleton) => (
-                    <div key={skeleton} className="menu-item-card skeleton-card">
-                      <div className="skeleton-img"></div>
-                      <div className="item-info">
-                        <div className="skeleton-text title"></div>
-                        <div className="skeleton-text desc"></div>
-                        <div className="skeleton-text price"></div>
-                      </div>
-                    </div>
+                    <Box key={skeleton} className="menu-item-card skeleton-card">
+                      <Skeleton variant="rectangular" height={280} className="skeleton-img" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)' }} />
+                      <Box className="item-info">
+                        <Skeleton variant="text" width="60%" height={24} className="skeleton-text title" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)', mx: 'auto' }} />
+                        <Skeleton variant="text" width="80%" height={16} className="skeleton-text desc" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)', mx: 'auto', mt: 1 }} />
+                        <Skeleton variant="text" width="40%" height={20} className="skeleton-text price" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)', mx: 'auto', mt: 1 }} />
+                      </Box>
+                    </Box>
                   ))
                 ) : (
                   menuItems.filter(item => item.subcategory === "PASTA").map((item, idx) => (
-                    <div key={idx} className="menu-item-card">
-                      <div className="item-img-container">
-                        <img src={item.photo} alt={item.name} />
-                      </div>
-                      <div className="item-info">
-                        <p className="item-name">{item.name.toUpperCase()}</p>
-                        <p className="item-desc">{item.description}</p>
-                        <p className="item-price">₱{item.price}</p>
-                      </div>
-                    </div>
+                    <Box key={idx} className="menu-item-card">
+                      <Box className="item-img-container">
+                        <Box component="img" src={item.photo} alt={item.name} />
+                      </Box>
+                      <Box className="item-info">
+                        <Typography component="p" className="item-name">{item.name.toUpperCase()}</Typography>
+                        <Typography component="p" className="item-desc">{item.description}</Typography>
+                        <Typography component="p" className="item-price">₱{item.price}</Typography>
+                      </Box>
+                    </Box>
                   ))
                 )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
 
-      <section id="menu-brunch" className="section menu-section" style={{ backgroundImage: `url(${brunchBg})` }}>
-        <div className="menu-bg-decor"></div>
-        <div className="menu-container">
+      <Box component="section" id="menu-brunch" className="section menu-section" sx={{ backgroundImage: `url(${brunchBg})` }}>
+        <Box className="menu-bg-decor" />
+        <Box className="menu-container">
           {/* BRUNCH SECTION */}
-          <div className="menu-category-group">
-            <h2 className="main-category-title">
-              <span className="title-line"></span> <span className="jp-accent">昼</span> BRUNCH <span className="title-line"></span>
-            </h2>
-            { /*<div className="category-icon-main"><img src={kitsuneIcon} alt="Kitsune" /></div>*/}
+          <Box className="menu-category-group">
+            <Typography component="h2" variant="h2" className="main-category-title">
+              <Box component="span" className="title-line" /> 
+              <Box component="span" className="jp-accent">昼</Box> BRUNCH 
+              <Box component="span" className="title-line" />
+            </Typography>
 
-            <div className="items-row scrollable-row">
+            <Box className="items-row scrollable-row">
               {isLoading ? (
                 [1, 2, 3, 4].map((skeleton) => (
-                  <div key={skeleton} className="menu-item-card skeleton-card">
-                    <div className="skeleton-img"></div>
-                    <div className="item-info">
-                      <div className="skeleton-text title"></div>
-                      <div className="skeleton-text desc"></div>
-                      <div className="skeleton-text price"></div>
-                    </div>
-                  </div>
+                  <Box key={skeleton} className="menu-item-card skeleton-card">
+                    <Skeleton variant="rectangular" height={280} className="skeleton-img" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)' }} />
+                    <Box className="item-info">
+                      <Skeleton variant="text" width="60%" height={24} className="skeleton-text title" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)', mx: 'auto' }} />
+                      <Skeleton variant="text" width="80%" height={16} className="skeleton-text desc" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)', mx: 'auto', mt: 1 }} />
+                      <Skeleton variant="text" width="40%" height={20} className="skeleton-text price" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)', mx: 'auto', mt: 1 }} />
+                    </Box>
+                  </Box>
                 ))
               ) : (
                 menuItems.filter(item => item.category === "BRUNCH").map((item, idx) => (
-                  <div key={idx} className="menu-item-card">
-                    <div className="item-img-container">
-                      <img src={item.photo} alt={item.name} />
-                    </div>
-                    <div className="item-info">
-                      <p className="item-name">{item.name.toUpperCase()}</p>
-                      <p className="item-desc">{item.description}</p>
-                      <p className="item-price">₱{item.price}</p>
-                    </div>
-                  </div>
+                  <Box key={idx} className="menu-item-card">
+                    <Box className="item-img-container">
+                      <Box component="img" src={item.photo} alt={item.name} />
+                    </Box>
+                    <Box className="item-info">
+                      <Typography component="p" className="item-name">{item.name.toUpperCase()}</Typography>
+                      <Typography component="p" className="item-desc">{item.description}</Typography>
+                      <Typography component="p" className="item-price">₱{item.price}</Typography>
+                    </Box>
+                  </Box>
                 ))
               )}
-            </div>
-          </div>
-        </div>
-      </section>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
 
-      <section id="menu-drinks" className="section menu-section" style={{ backgroundImage: `url(${drinksBg})` }}>
-        <div className="menu-bg-decor"></div>
-        <div className="menu-container">
+      <Box component="section" id="menu-drinks" className="section menu-section" sx={{ backgroundImage: `url(${drinksBg})` }}>
+        <Box className="menu-bg-decor" />
+        <Box className="menu-container">
           {/* DRINKS MENU SECTION */}
-          <div className="menu-category-group">
-            <h2 className="main-category-title">
-              <span className="title-line"></span> <span className="jp-accent">飲</span> DRINKS MENU <span className="title-line"></span>
-            </h2>
-            { /*<div className="category-icon-main"><img src={kitsuneIcon} alt="Kitsune" /></div>*/}
+          <Box className="menu-category-group">
+            <Typography component="h2" variant="h2" className="main-category-title">
+              <Box component="span" className="title-line" /> 
+              <Box component="span" className="jp-accent">飲</Box> DRINKS MENU 
+              <Box component="span" className="title-line" />
+            </Typography>
 
             {/* KOHI */}
-            <div className="subcategory-section drinks-section">
-              <h3 className="subcategory-title">KŌHI (COFFEE)</h3>
-              <div className="items-row scrollable-row">
+            <Box className="subcategory-section drinks-section">
+              <Typography component="h3" variant="h3" className="subcategory-title">KŌHI (COFFEE)</Typography>
+              <Box className="items-row scrollable-row">
                 {isLoading ? (
                   [1, 2, 3, 4].map((skeleton) => (
-                    <div key={skeleton} className="menu-item-card skeleton-card">
-                      <div className="skeleton-img"></div>
-                      <div className="item-info">
-                        <div className="skeleton-text title"></div>
-                        <div className="skeleton-text desc"></div>
-                        <div className="skeleton-text price"></div>
-                      </div>
-                    </div>
+                    <Box key={skeleton} className="menu-item-card skeleton-card">
+                      <Skeleton variant="rectangular" height={280} className="skeleton-img" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)' }} />
+                      <Box className="item-info">
+                        <Skeleton variant="text" width="60%" height={24} className="skeleton-text title" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)', mx: 'auto' }} />
+                        <Skeleton variant="text" width="80%" height={16} className="skeleton-text desc" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)', mx: 'auto', mt: 1 }} />
+                        <Skeleton variant="text" width="40%" height={20} className="skeleton-text price" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)', mx: 'auto', mt: 1 }} />
+                      </Box>
+                    </Box>
                   ))
                 ) : (
                   menuItems.filter(item => item.subcategory === "KOHI (COFFEE)").map((item, idx) => (
-                    <div key={idx} className="menu-item-card">
-                      <div className="item-img-container">
-                        <img src={item.photo} alt={item.name} />
-                      </div>
-                      <div className="item-info">
-                        <p className="item-name">{item.name.toUpperCase()}</p>
-                        <p className="item-desc">{item.description}</p>
-                        <p className="item-price">₱{item.price}</p>
-                      </div>
-                    </div>
+                    <Box key={idx} className="menu-item-card">
+                      <Box className="item-img-container">
+                        <Box component="img" src={item.photo} alt={item.name} />
+                      </Box>
+                      <Box className="item-info">
+                        <Typography component="p" className="item-name">{item.name.toUpperCase()}</Typography>
+                        <Typography component="p" className="item-desc">{item.description}</Typography>
+                        <Typography component="p" className="item-price">₱{item.price}</Typography>
+                      </Box>
+                    </Box>
                   ))
                 )}
-              </div>
-            </div>
+              </Box>
+            </Box>
 
             {/* MATCHA */}
-            <div className="subcategory-section drinks-section">
-              <h3 className="subcategory-title">MATCHA</h3>
-              <div className="items-row scrollable-row">
+            <Box className="subcategory-section drinks-section">
+              <Typography component="h3" variant="h3" className="subcategory-title">MATCHA</Typography>
+              <Box className="items-row scrollable-row">
                 {isLoading ? (
                   [1, 2, 3, 4].map((skeleton) => (
-                    <div key={skeleton} className="menu-item-card skeleton-card">
-                      <div className="skeleton-img"></div>
-                      <div className="item-info">
-                        <div className="skeleton-text title"></div>
-                        <div className="skeleton-text desc"></div>
-                        <div className="skeleton-text price"></div>
-                      </div>
-                    </div>
+                    <Box key={skeleton} className="menu-item-card skeleton-card">
+                      <Skeleton variant="rectangular" height={280} className="skeleton-img" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)' }} />
+                      <Box className="item-info">
+                        <Skeleton variant="text" width="60%" height={24} className="skeleton-text title" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)', mx: 'auto' }} />
+                        <Skeleton variant="text" width="80%" height={16} className="skeleton-text desc" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)', mx: 'auto', mt: 1 }} />
+                        <Skeleton variant="text" width="40%" height={20} className="skeleton-text price" sx={{ bgcolor: 'rgba(211, 84, 0, 0.1)', mx: 'auto', mt: 1 }} />
+                      </Box>
+                    </Box>
                   ))
                 ) : (
                   menuItems.filter(item => item.subcategory === "MATCHA").map((item, idx) => (
-                    <div key={idx} className="menu-item-card">
-                      <div className="item-img-container">
-                        <img src={item.photo} alt={item.name} />
-                      </div>
-                      <div className="item-info">
-                        <p className="item-name">{item.name.toUpperCase()}</p>
-                        <p className="item-desc">{item.description}</p>
-                        <p className="item-price">₱{item.price}</p>
-                      </div>
-                    </div>
+                    <Box key={idx} className="menu-item-card">
+                      <Box className="item-img-container">
+                        <Box component="img" src={item.photo} alt={item.name} />
+                      </Box>
+                      <Box className="item-info">
+                        <Typography component="p" className="item-name">{item.name.toUpperCase()}</Typography>
+                        <Typography component="p" className="item-desc">{item.description}</Typography>
+                        <Typography component="p" className="item-price">₱{item.price}</Typography>
+                      </Box>
+                    </Box>
                   ))
                 )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
 
-      <section id="location" className="section proudly-local">
-        <div className="local-container">
-          <div className="local-image">
-            <img src={lumabangImg} alt="Lumabang, Nueva Vizcaya" />
-          </div>
-          <div className="local-content">
-            <span className="local-subtitle">📍 PROUDLY LOCAL</span>
-            <h2>From Nueva Vizcaya,<br /><span className="highlight">For You.</span></h2>
-            <p>Rooted in the beauty and culture of Nueva Vizcaya,<br />
+      <Box component="section" id="location" className="section proudly-local">
+        <Box className="local-container">
+          <Box className="local-image">
+            <Box component="img" src={lumabangImg} alt="Lumabang, Nueva Vizcaya" />
+          </Box>
+          <Box className="local-content">
+            <Typography component="span" className="local-subtitle">📍 PROUDLY LOCAL</Typography>
+            <Typography component="h2" variant="h2">From Nueva Vizcaya,<br /><Box component="span" className="highlight">For You.</Box></Typography>
+            <Typography component="p">
+              Rooted in the beauty and culture of Nueva Vizcaya,<br />
               Kitsune Kissaten celebrates local community,<br />
               warm hospitality, and the simple joys of<br />
-              good food and coffee.</p>
-          </div>
-          <div className="torii-illustration"><img src={toriiIcon} alt="Torii Gate" /></div>
-        </div>
-      </section>
+              good food and coffee.
+            </Typography>
+          </Box>
+          <Box className="torii-illustration"><Box component="img" src={toriiIcon} alt="Torii Gate" /></Box>
+        </Box>
+      </Box>
 
-      <section id="contact" className="section contact-section">
-        <div className="contact-container">
-          <div className="contact-header">
-            <span className="decorative-line"></span>
-            <h2>CONTACT</h2>
-            <span className="decorative-line"></span>
-          </div>
+      <Box component="section" id="contact" className="section contact-section">
+        <Box className="contact-container">
+          <Box className="contact-header">
+            <Box component="span" className="decorative-line" />
+            <Typography component="h2" variant="h2">CONTACT</Typography>
+            <Box component="span" className="decorative-line" />
+          </Box>
 
-          <div className="contact-grid">
-            <div className="contact-info-box">
-              <div className="info-icon">📞</div>
-              <div className="info-text">
-                <h4>CALL US</h4>
-                <p>+63 912 345 6789</p>
-              </div>
-            </div>
+          <Box className="contact-grid">
+            <Box className="contact-info-box">
+              <Box className="info-icon">📞</Box>
+              <Box className="info-text">
+                <Typography component="h4" variant="h4">CALL US</Typography>
+                <Typography component="p">+63 912 345 6789</Typography>
+              </Box>
+            </Box>
 
-            <div className="contact-info-box">
-              <div className="info-icon"><img src={communicationIcon} alt="Email" style={{ width: '35px', height: '35px', objectFit: 'contain' }} /></div>
-              <div className="info-text">
-                <h4>EMAIL US</h4>
-                <p>kitsunekissatenph@gmail.com</p>
-              </div>
-            </div>
+            <Box className="contact-info-box">
+              <Box className="info-icon">
+                <Box component="img" src={communicationIcon} alt="Email" sx={{ width: '35px', height: '35px', objectFit: 'contain' }} />
+              </Box>
+              <Box className="info-text">
+                <Typography component="h4" variant="h4">EMAIL US</Typography>
+                <Typography component="p">kitsunekissatenph@gmail.com</Typography>
+              </Box>
+            </Box>
 
-            <div className="contact-info-box">
-              <div className="info-icon"><img src={clockIcon} alt="Clock" style={{ width: '35px', height: '35px', objectFit: 'contain' }} /></div>
-              <div className="info-text">
-                <h4>OPEN DAILY</h4>
-                <p>Mon - Sun<br />8:00 AM - 10:00 PM</p>
-              </div>
-            </div>
-          </div>
+            <Box className="contact-info-box">
+              <Box className="info-icon">
+                <Box component="img" src={clockIcon} alt="Clock" sx={{ width: '35px', height: '35px', objectFit: 'contain' }} />
+              </Box>
+              <Box className="info-text">
+                <Typography component="h4" variant="h4">OPEN DAILY</Typography>
+                <Typography component="p">Mon - Sun<br />8:00 AM - 10:00 PM</Typography>
+              </Box>
+            </Box>
+          </Box>
 
-          <div className="contact-footer">
-            <div className="follow-header">
-              <span className="decorative-line-small"></span>
-              <h3>FOLLOW US</h3>
-              <span className="decorative-line-small"></span>
-            </div>
-            <div className="social-links-container">
-              <a href="https://www.facebook.com/kitsunekissaten/" target="_blank" rel="noopener noreferrer" className="specific-social-link">
-                <span className="platform">FACEBOOK</span>
-                <span className="handle">/kitsunekissaten</span>
-              </a>
-              <span className="social-divider"></span>
-              <a href="https://www.instagram.com/kitsunekissaten" target="_blank" rel="noopener noreferrer" className="specific-social-link">
-                <span className="platform">INSTAGRAM</span>
-                <span className="handle">@kitsunekissaten</span>
-              </a>
-              <span className="social-divider"></span>
-              <a href="mailto:kitsunekissatenph@gmail.com" className="specific-social-link">
-                <span className="platform">GMAIL</span>
-                <span className="handle">kitsunekissatenph@gmail.com</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+          <Box className="contact-footer">
+            <Box className="follow-header">
+              <Box component="span" className="decorative-line-small" />
+              <Typography component="h3" variant="h3">FOLLOW US</Typography>
+              <Box component="span" className="decorative-line-small" />
+            </Box>
+            <Box className="social-links-container">
+              <Box
+                component="a"
+                href="https://www.facebook.com/kitsunekissaten/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="specific-social-link"
+                sx={{ textDecoration: 'none' }}
+              >
+                <Box component="span" className="platform">FACEBOOK</Box>
+                <Box component="span" className="handle">/kitsunekissaten</Box>
+              </Box>
+              <Box component="span" className="social-divider" />
+              <Box
+                component="a"
+                href="https://www.instagram.com/kitsunekissaten"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="specific-social-link"
+                sx={{ textDecoration: 'none' }}
+              >
+                <Box component="span" className="platform">INSTAGRAM</Box>
+                <Box component="span" className="handle">@kitsunekissaten</Box>
+              </Box>
+              <Box component="span" className="social-divider" />
+              <Box
+                component="a"
+                href="mailto:kitsunekissatenph@gmail.com"
+                className="specific-social-link"
+                sx={{ textDecoration: 'none' }}
+              >
+                <Box component="span" className="platform">GMAIL</Box>
+                <Box component="span" className="handle">kitsunekissatenph@gmail.com</Box>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
 
-      <footer className="footer">
-        <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Kitsune Kissaten. All Rights Reserved.</p>
-        </div>
-      </footer>
+      <Box component="footer" className="footer">
+        <Box className="footer-bottom">
+          <Typography component="p">&copy; {new Date().getFullYear()} Kitsune Kissaten. All Rights Reserved.</Typography>
+        </Box>
+      </Box>
 
       {/* Scroll to Top Button */}
-      <button
+      <Box
+        component="button"
         className={`scroll-to-top ${showScroll ? 'visible' : ''}`}
         onClick={scrollToTop}
         aria-label="Scroll to top"
       >
         ↑
-      </button>
-    </div>
+      </Box>
+    </Box>
   );
 }
 
