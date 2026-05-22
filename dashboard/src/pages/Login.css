@@ -115,3 +115,15 @@
 .back-link:hover {
   color: var(--cream);
 }
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 2rem 1.5rem;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  .login-title {
+    font-size: 2rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+}
